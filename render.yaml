@@ -12,7 +12,7 @@ services:
     name: cardigans-api
     runtime: node
     plan: free
-    buildCommand: npm ci && npm run db:generate -w server && npm run build -w server
+    buildCommand: npm ci --include=dev && npm run db:generate -w server && npm run build -w server
     startCommand: npm run db:deploy -w server && npm run start -w server
     healthCheckPath: /health
     envVars:
