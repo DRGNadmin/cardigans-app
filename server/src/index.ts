@@ -97,11 +97,21 @@ async function main() {
   await supportRoutes(fastify);
   await adminRoutes(fastify, config);
 
-  await prisma.$connect();
-  await bootstrapAdmin(config);
-  await ensureDefaultTasks();
-
   await fastify.listen({ port: config.PORT, host: config.HOST });
+
+  const initDb = async () => {
+    await prisma.$connect();
+    await bootstrapAdmin(config);
+    await ensureDefaultTasks();
+    fastify.log.info("database ready");
+  };
+
+  initDb().catch((err) => {
+    fastify.log.error(err, "startup_db_init_failed");
+    setTimeout(() => {
+      initDb().catch((retryErr) => fastify.log.error(retryErr, "startup_db_init_retry_failed"));
+    }, 5000);
+  });
 
   const notifyTickMs = 60 * 60 * 1000;
   setInterval(() => {
