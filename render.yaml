@@ -14,8 +14,7 @@ services:
     runtime: node
     plan: free
     region: frankfurt
-    buildCommand: npm ci && npm run db:generate -w server && npm run build -w server
-    preDeployCommand: npm run db:deploy -w server
+    buildCommand: npm ci && npm run db:generate -w server && npm run build -w server && npm run db:deploy -w server
     startCommand: npm run start -w server
     healthCheckPath: /health
     envVars:
