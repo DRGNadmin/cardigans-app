@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
+    <title>Cardigans Gaming</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Oswald:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <script>
+      (function () {
+        function syncAppSurface() {
+          var wa = window.Telegram && window.Telegram.WebApp;
+          var hex = null;
+          var raw = wa && wa.themeParams && wa.themeParams.bg_color;
+          if (raw) {
+            var s = String(raw).replace(/^#/, "");
+            if (/^[0-9a-fA-F]{6}$/i.test(s)) hex = "#" + s.toLowerCase();
+          }
+          if (!hex) {
+            if (wa && wa.colorScheme === "light") hex = "#ffffff";
+            else if (wa) hex = "#17212b";
+            else hex = "#111111";
+          }
+          document.documentElement.style.setProperty("--app-surface", hex);
+          try {
+            if (wa && wa.setBackgroundColor) wa.setBackgroundColor(hex);
+          } catch (e) {}
+        }
+
+        function syncAppHeight() {
+          var wa = window.Telegram && window.Telegram.WebApp;
+          if (wa) {
+            try {
+              wa.ready();
+              wa.expand();
+            } catch (e) {}
+          }
+          var c = [];
+          if (wa && typeof wa.viewportStableHeight === "number" && wa.viewportStableHeight > 0) {
+            c.push(wa.viewportStableHeight);
+          }
+          if (wa && typeof wa.viewportHeight === "number" && wa.viewportHeight > 0) {
+            c.push(wa.viewportHeight);
+          }
+          var vv = window.visualViewport && window.visualViewport.height;
+          if (typeof vv === "number" && vv > 0) c.push(vv);
+          if (window.innerHeight > 0) c.push(window.innerHeight);
+          var h = c.length ? Math.max.apply(null, c) : 600;
+          document.documentElement.style.setProperty("--app-h", Math.round(h) + "px");
+        }
+        syncAppSurface();
+        syncAppHeight();
+        window.addEventListener("resize", syncAppHeight);
+        if (window.visualViewport) {
+          window.visualViewport.addEventListener("resize", syncAppHeight);
+        }
+        if (window.Telegram && window.Telegram.WebApp && typeof window.Telegram.WebApp.onEvent === "function") {
+          try {
+            window.Telegram.WebApp.onEvent("viewportChanged", syncAppHeight);
+            window.Telegram.WebApp.onEvent("themeChanged", syncAppSurface);
+          } catch (e) {}
+        }
+      })();
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

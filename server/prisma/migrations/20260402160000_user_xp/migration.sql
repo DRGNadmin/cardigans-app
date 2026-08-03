@@ -1,0 +1,2 @@
+-- AlterTable
+ALTER TABLE "users" ADD COLUMN "xp_total" INTEGER NOT NULL DEFAULT 0;

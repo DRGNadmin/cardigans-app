@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cardigans — фон экрана (Brand Backdrop)</title>
+    <style>
+      :root {
+        --accent: #e98d2b;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        margin: 0;
+        min-height: 100%;
+        min-height: 100dvh;
+      }
+      /* Экран: относительный контейнер на весь вьюпорт */
+      .screen {
+        position: relative;
+        min-height: 100vh;
+        min-height: 100dvh;
+        overflow: hidden;
+        background: #111;
+      }
+      /* === Brand Backdrop (как в miniapp BrandBackdrop.tsx + index.css) === */
+      .brand-backdrop-root {
+        position: absolute;
+        inset: 0;
+        z-index: 0;
+        overflow: hidden;
+        pointer-events: none;
+      }
+      .brand-backdrop-base {
+        position: absolute;
+        inset: 0;
+        background:
+          radial-gradient(ellipse 90% 70% at 78% 8%, rgba(233, 141, 43, 0.14) 0%, transparent 42%),
+          radial-gradient(ellipse 70% 55% at 12% 88%, rgba(233, 141, 43, 0.08) 0%, transparent 48%),
+          radial-gradient(ellipse 140% 100% at 50% 0%, #1a1612 0%, #0c0a08 52%, #060505 100%);
+      }
+      .brand-backdrop-lines {
+        position: absolute;
+        left: -24%;
+        top: -8%;
+        width: 138%;
+        height: 116%;
+        opacity: 0.98;
+        animation: brandLinesDrift 28s ease-in-out infinite;
+        -webkit-mask-image: radial-gradient(
+          ellipse 94% 92% at 50% 50%,
+          #000 0%,
+          #000 68%,
+          transparent 100%
+        );
+        mask-image: radial-gradient(
+          ellipse 94% 92% at 50% 50%,
+          #000 0%,
+          #000 68%,
+          transparent 100%
+        );
+      }
+      .brand-backdrop-gradient {
+        position: absolute;
+        inset: -40%;
+        pointer-events: none;
+        mix-blend-mode: screen;
+        opacity: 0.98;
+        filter: blur(1.5px);
+      }
+      .brand-backdrop-gradient-a {
+        background: radial-gradient(
+          ellipse 58% 48% at 70% 16%,
+          rgba(233, 141, 43, 0.62) 0%,
+          rgba(233, 141, 43, 0.2) 32%,
+          rgba(233, 141, 43, 0.06) 52%,
+          transparent 68%
+        );
+        animation: brandGlowA 16s ease-in-out infinite;
+      }
+      .brand-backdrop-gradient-b {
+        background: radial-gradient(
+          ellipse 54% 46% at 18% 76%,
+          rgba(233, 141, 43, 0.45) 0%,
+          rgba(233, 141, 43, 0.14) 38%,
+          rgba(233, 141, 43, 0.05) 55%,
+          transparent 72%
+        );
+        animation: brandGlowB 18s ease-in-out infinite;
+        mix-blend-mode: lighten;
+        opacity: 0.92;
+      }
+      .brand-backdrop-vignette {
+        position: absolute;
+        inset: 0;
+        background: radial-gradient(ellipse 88% 72% at 50% 45%, transparent 38%, rgba(0, 0, 0, 0.48) 100%);
+        pointer-events: none;
+      }
+      @keyframes brandLinesDrift {
+        0%,
+        100% {
+          transform: translate(-3.5%, 0) scale(1);
+        }
+        40% {
+          transform: translate(-2%, -1.2%) scale(1.02);
+        }
+        70% {
+          transform: translate(-4.8%, 0.8%) scale(1.01);
+        }
+      }
+      @keyframes brandGlowA {
+        0%,
+        100% {
+          transform: translate(0, 0) scale(1);
+          opacity: 0.88;
+        }
+        35% {
+          transform: translate(8%, 6%) scale(1.12);
+          opacity: 1;
+        }
+        65% {
+          transform: translate(-5%, -4%) scale(0.94);
+          opacity: 0.78;
+        }
+      }
+      @keyframes brandGlowB {
+        0%,
+        100% {
+          transform: translate(0, 0) scale(1.05);
+          opacity: 0.72;
+        }
+        40% {
+          transform: translate(-10%, -8%) scale(1.08);
+          opacity: 1;
+        }
+        75% {
+          transform: translate(6%, 10%) scale(0.92);
+          opacity: 0.62;
+        }
+      }
+      /* Пример контента поверх фона */
+      .content {
+        position: relative;
+        z-index: 1;
+        padding: 2rem;
+        font-family: system-ui, sans-serif;
+        color: rgba(255, 255, 255, 0.85);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="screen">
+      <div class="brand-backdrop-root" aria-hidden="true">
+        <div class="brand-backdrop-base"></div>
+        <svg
+          class="brand-backdrop-lines"
+          viewBox="0 0 400 900"
+          preserveAspectRatio="xMidYMid slice"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <defs>
+            <linearGradient id="cg-brand-lines" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="rgba(255,255,255,0.28)" />
+              <stop offset="45%" stop-color="rgba(255,255,255,0.14)" />
+              <stop offset="100%" stop-color="rgba(255,255,255,0.22)" />
+            </linearGradient>
+          </defs>
+          <g fill="none" stroke="url(#cg-brand-lines)" stroke-width="0.48" vector-effect="non-scaling-stroke">
+            <g transform="rotate(-24 200 450)">
+              <ellipse cx="-130" cy="140" rx="600" ry="540" />
+            </g>
+            <g transform="rotate(17 200 450)">
+              <ellipse cx="550" cy="240" rx="640" ry="480" />
+            </g>
+            <g transform="rotate(-8 200 450)">
+              <ellipse cx="170" cy="-220" rx="470" ry="420" />
+            </g>
+            <g transform="rotate(26 200 450)">
+              <ellipse cx="40" cy="980" rx="560" ry="500" />
+            </g>
+            <g transform="rotate(-36 200 450)">
+              <ellipse cx="400" cy="680" rx="720" ry="520" />
+            </g>
+            <g transform="rotate(11 200 450)">
+              <ellipse cx="-220" cy="460" rx="520" ry="450" />
+            </g>
+            <g transform="rotate(-14 200 450)">
+              <ellipse cx="320" cy="-160" rx="480" ry="440" />
+            </g>
+          </g>
+        </svg>
+        <div class="brand-backdrop-gradient brand-backdrop-gradient-a"></div>
+        <div class="brand-backdrop-gradient brand-backdrop-gradient-b"></div>
+        <div class="brand-backdrop-vignette"></div>
+      </div>
+      <div class="content">
+        <h1 style="margin: 0 0 0.5rem; font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase">
+          Пример экрана
+        </h1>
+        <p style="margin: 0; color: rgba(255, 255, 255, 0.5); max-width: 28rem; line-height: 1.5">
+          Контент лежит в блоке с <code>position: relative; z-index: 1</code>. Фон — копия React-компонента
+          <code>BrandBackdrop</code> и стилей из <code>index.css</code>.
+        </p>
+      </div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,780 @@
+{
+  "version": 1,
+  "skills": {
+    "a2a-protocol": {
+      "source": "AbsolutelySkilled/AbsolutelySkilled",
+      "sourceType": "github",
+      "computedHash": "229d601cd076d86d6d65f8935d9902391449f50e5ce4bf66be9249aa297fb91f"
+    },
+    "a2ui": {
+      "source": "AbsolutelySkilled/AbsolutelySkilled",
+      "sourceType": "github",
+      "computedHash": "798dad82b58c839f675b110d2067f8d28dfb293ff621ec3c4125fa135275f1e0"
+    },
+    "absolute-brainstorm": {
+      "source": "AbsolutelySkilled/AbsolutelySkilled",
+      "sourceType": "github",
+      "computedHash": "cf6dcb39a32b4e3898e77e2eda893b94c64ab0298390f11fc6ddc8bf1e300f01"
+    },
+    "absolute-human": {
+      "source": "AbsolutelySkilled/AbsolutelySkilled",
+      "sourceType": "github",
+      "computedHash": "238298b50828e6e6f2dda6c5f5bdab1f9ee4a75bfda3451d9a06b0d7257fab74"
+    },
+    "absolute-marketing": {
+      "source": "AbsolutelySkilled/AbsolutelySkilled",
+      "sourceType": "github",
+      "computedHash": "82baf918fba69a34bdfbcc006c53359e52a1701340ba48c5d15e1bd2759e33fc"
+    },
+    "absolute-seo": {
+      "source": "AbsolutelySkilled/AbsolutelySkilled",
+      "sourceType": "github",
+      "computedHash": "41d0146976c410303f266393e4eacbd311fe9514c1f0235e4b9c6d9098d45bec"
+    },
+    "absolute-simplify": {
+      "source": "AbsolutelySkilled/AbsolutelySkilled",
+      "sourceType": "github",
+      "computedHash": "f2c21277253431617c5f7fdbb0dff9d364f9139ca9f5cb9576a2e7b1e4844982"
+    },
+    "absolute-ui": {
+      "source": "AbsolutelySkilled/AbsolutelySkilled",
+      "sourceType": "github",
+      "computedHash": "942da178b5ce191ee265898aa05160bb64bae0c7d9c4f9968de79ecd8a505840"
+    },
+    "accessibility-wcag": {
+      "source": "AbsolutelySkilled/AbsolutelySkilled",
+      "sourceType": "github",
+      "computedHash": "67b4f1274466ac21de9fa3f3593ad6f8eb5fa6dcb95b261fdcb0ae63e9a9897a"
+    },
+    "account-management": {
+      "source": "AbsolutelySkilled/AbsolutelySkilled",
+      "sourceType": "github",
+      "computedHash": "87ad227d39923de5d99232f658348ffa3d0ef75b954ed1168922e04fbd195780"
+    },
+    "address-pr-comments": {
+      "source": "AbsolutelySkilled/AbsolutelySkilled",
+      "sourceType": "github",
+      "computedHash": "f613e1b50580e2e2013367b0e6536a1b3023432db47c09e274a7309af89c3bad"
+    },
+    "agile-scrum": {
+      "source": "AbsolutelySkilled/AbsolutelySkilled",
+      "sourceType": "github",
+      "computedHash": "dcd7a0c82ece45571fc9856331b5f54ab2d0d0ac0d4319704d137d760f433ec8"
+    },
+    "ai-agent-design": {
+      "source": "AbsolutelySkilled/AbsolutelySkilled",
+      "sourceType": "github",
+      "computedHash": "c5cfa00ab355c4a35695374c90a4f84f9384d9fbc8c66298ac692853318cc66c"
+    },
+    "analytics-engineering": {
+      "source": "AbsolutelySkilled/AbsolutelySkilled",
+      "sourceType": "github",
+      "computedHash": "718f5ca0322a1ebec74245f3f6b50f0d9e1776282652605e4867ce7f018d11ee"
+    },
+    "android-kotlin": {
+      "source": "AbsolutelySkilled/AbsolutelySkilled",
+      "sourceType": "github",
+      "computedHash": "b38879d66c38e336909c39ed93d842bfdbc0a1be387c44a0674e6b2263d3bb58"
+    },
+    "api-design": {
+      "source": "AbsolutelySkilled/AbsolutelySkilled",
+      "sourceType": "github",
+      "computedHash": "61153861f4b0742d7480258fdc9333aa42453cd404fb59001d6381ddf2bc4e8a"
+    },
+    "api-monetization": {
+      "source": "AbsolutelySkilled/AbsolutelySkilled",
+      "sourceType": "github",
+      "computedHash": "4b4ad12f9535968fa776bd6c8234a768ad91209d64a7978e2e869f27c00b586f"
+    },
+    "api-testing": {
+      "source": "AbsolutelySkilled/AbsolutelySkilled",
+      "sourceType": "github",
+      "computedHash": "fc2412879bc5df3826ae09da42a90351f25422be38f7211775558404f2bae9ad"
+    },
+    "appsec-owasp": {
+      "source": "AbsolutelySkilled/AbsolutelySkilled",
+      "sourceType": "github",
+      "computedHash": "6ac69f2140e7d8db711be14999918d066065e2346de81dcd1aca176df1e277de"
+    },
+    "backend-engineering": {
+      "source": "AbsolutelySkilled/AbsolutelySkilled",
+      "sourceType": "github",
+      "computedHash": "eaedc688ddd54ac60ca0ddc9d2f6e94888e5179ab6ac5e4194ad5260506b53c5"
+    },
+    "bookkeeping-automation": {
+      "source": "AbsolutelySkilled/AbsolutelySkilled",
+      "sourceType": "github",
+      "computedHash": "ddfef9d8d5d8afd9c4925b44e3521412b277c143909513f68a74c14da7b44f67"
+    },
+    "brand-strategy": {
+      "source": "AbsolutelySkilled/AbsolutelySkilled",
+      "sourceType": "github",
+      "computedHash": "7a258f0e8a5a8be9ab8d8e85f4a1b740326b36c3f39dcf81e5396d85c1a2375b"
+    },
+    "budgeting-planning": {
+      "source": "AbsolutelySkilled/AbsolutelySkilled",
+      "sourceType": "github",
+      "computedHash": "c73e827c9d9d4c8a63702b433ee77f1c7d874603d63d6ef7addae20f38240a1a"
+    },
+    "chaos-engineering": {
+      "source": "AbsolutelySkilled/AbsolutelySkilled",
+      "sourceType": "github",
+      "computedHash": "10c89c8c348f784ca3a338a85c94f14e827a968977238ca547215f9cec522e57"
+    },
+    "ci-cd-pipelines": {
+      "source": "AbsolutelySkilled/AbsolutelySkilled",
+      "sourceType": "github",
+      "computedHash": "e15e75ea81e19ceac6a618271366423ba17aeb8764f6c31d7ac811a71e26ce69"
+    },
+    "clean-architecture": {
+      "source": "AbsolutelySkilled/AbsolutelySkilled",
+      "sourceType": "github",
+      "computedHash": "5d898326aaf1cc9c435af001ed53f73d0d80407947aa0db85556ed9f8811012b"
+    },
+    "clean-code": {
+      "source": "AbsolutelySkilled/AbsolutelySkilled",
+      "sourceType": "github",
+      "computedHash": "273f7407701ec13af7b50b1ad0db46921c76fd3ec933c539c9358a1d4a6db36f"
+    },
+    "cli-design": {
+      "source": "AbsolutelySkilled/AbsolutelySkilled",
+      "sourceType": "github",
+      "computedHash": "948c984502d4e2251c5ee154c530a18e4471efdef5784b8e2da117a68931ad99"
+    },
+    "cloud-aws": {
+      "source": "AbsolutelySkilled/AbsolutelySkilled",
+      "sourceType": "github",
+      "computedHash": "30806edab1f7e8c25a5e95472ce8e88a0fee3453cc1de1e8ded10c478837b40f"
+    },
+    "cloud-gcp": {
+      "source": "AbsolutelySkilled/AbsolutelySkilled",
+      "sourceType": "github",
+      "computedHash": "711d3de43e8f04413352dfcec68ecd22a30ead726ed80c450dbf86262edef91c"
+    },
+    "cloud-security": {
+      "source": "AbsolutelySkilled/AbsolutelySkilled",
+      "sourceType": "github",
+      "computedHash": "58d10fd43092bf6490709c79a805c8ab0cf65eaeaca149e49d1d1cc870fd14d0"
+    },
+    "cmux": {
+      "source": "AbsolutelySkilled/AbsolutelySkilled",
+      "sourceType": "github",
+      "computedHash": "aa853c9ff54657920b76163453dbbcea740726c165962f16019b39172ef9f6b6"
+    },
+    "code-review-mastery": {
+      "source": "AbsolutelySkilled/AbsolutelySkilled",
+      "sourceType": "github",
+      "computedHash": "7412a87b7974a87825c4649a9e381daee14c826181ba722e2259890b14cc051e"
+    },
+    "codedocs": {
+      "source": "AbsolutelySkilled/AbsolutelySkilled",
+      "sourceType": "github",
+      "computedHash": "aa555ca4204988d8fca451b6e0e59dd67031ad29d86cb040e3913c8ea436383f"
+    },
+    "community-management": {
+      "source": "AbsolutelySkilled/AbsolutelySkilled",
+      "sourceType": "github",
+      "computedHash": "294560688be94840e9e9c3d380368aa7f1b22e8c85521a825d167def8096a5b0"
+    },
+    "compensation-strategy": {
+      "source": "AbsolutelySkilled/AbsolutelySkilled",
+      "sourceType": "github",
+      "computedHash": "5df17674c4b288cf3f2ac4c3f7b34e1ec3d34f40ceffd1463f6ac9c83f83a2e2"
+    },
+    "competitive-analysis": {
+      "source": "AbsolutelySkilled/AbsolutelySkilled",
+      "sourceType": "github",
+      "computedHash": "b961cd69df969bf60329a6016cdbc51057e4bc939fcff285cf6985656e6656d3"
+    },
+    "computer-vision": {
+      "source": "AbsolutelySkilled/AbsolutelySkilled",
+      "sourceType": "github",
+      "computedHash": "8644691f12bb6ba30390b2dedf4696abaafbdd9f4aef2c8a2151bff5b012e29e"
+    },
+    "content-marketing": {
+      "source": "AbsolutelySkilled/AbsolutelySkilled",
+      "sourceType": "github",
+      "computedHash": "c29b345b4a88b2fb6fea5d39e8110bbe955c55e79044face3bab8151cb6bf0ec"
+    },
+    "contract-drafting": {
+      "source": "AbsolutelySkilled/AbsolutelySkilled",
+      "sourceType": "github",
+      "computedHash": "2d6e904f9773da23a63e4db061b088bb5949ea2fef016a84dbab9c42756c6d3e"
+    },
+    "copywriting": {
+      "source": "AbsolutelySkilled/AbsolutelySkilled",
+      "sourceType": "github",
+      "computedHash": "717f89492f57e238535350ab6fccd1761432f251f89f3bb0fac0ed21fe079cd9"
+    },
+    "crm-management": {
+      "source": "AbsolutelySkilled/AbsolutelySkilled",
+      "sourceType": "github",
+      "computedHash": "210cb846ffa56cc78b9a8973d2cb9cfa253f9a140170c4d58ee083835cef13f6"
+    },
+    "cryptography": {
+      "source": "AbsolutelySkilled/AbsolutelySkilled",
+      "sourceType": "github",
+      "computedHash": "e0fb32cb8e6a4126407c18419318c3114ec8cc05c831959c2716ba49f5dd4b8e"
+    },
+    "customer-research": {
+      "source": "AbsolutelySkilled/AbsolutelySkilled",
+      "sourceType": "github",
+      "computedHash": "bb8e4b070f51419722bc063bc3261631c0e9266bad407c54e17a20dba6a5ba04"
+    },
+    "customer-success-playbook": {
+      "source": "AbsolutelySkilled/AbsolutelySkilled",
+      "sourceType": "github",
+      "computedHash": "161f8435ed054092df816d40b28eafc2e2575ba651d14ee94bb4391555214730"
+    },
+    "customer-support-ops": {
+      "source": "AbsolutelySkilled/AbsolutelySkilled",
+      "sourceType": "github",
+      "computedHash": "c103acd61905923ed4ca0891a10fe882b1935de8c50ad2a284b70f680d7a96a3"
+    },
+    "cypress-testing": {
+      "source": "AbsolutelySkilled/AbsolutelySkilled",
+      "sourceType": "github",
+      "computedHash": "8a8debefb80a344edfc47789c70a7a5f4e06969fe00e82089549e104412573aa"
+    },
+    "data-pipelines": {
+      "source": "AbsolutelySkilled/AbsolutelySkilled",
+      "sourceType": "github",
+      "computedHash": "eaefb0d0f64c0aa1cd41f68105f487cb516c51743c8b75b51cdee52688cd40d6"
+    },
+    "data-quality": {
+      "source": "AbsolutelySkilled/AbsolutelySkilled",
+      "sourceType": "github",
+      "computedHash": "941466be1955b4576f0fc7a771cfb3eca67afe59353b15071bb2c9178448e65f"
+    },
+    "data-science": {
+      "source": "AbsolutelySkilled/AbsolutelySkilled",
+      "sourceType": "github",
+      "computedHash": "f3f8cedbe90a35c12639fc3a2692cdb64ffc06a51d936afacb20226f49eec415"
+    },
+    "data-warehousing": {
+      "source": "AbsolutelySkilled/AbsolutelySkilled",
+      "sourceType": "github",
+      "computedHash": "cf4fcec18531812adc66d04feca7efbc104e13641c45477a97b4588a77162230"
+    },
+    "database-engineering": {
+      "source": "AbsolutelySkilled/AbsolutelySkilled",
+      "sourceType": "github",
+      "computedHash": "f0294475ca706793d93ff058f062648c9c9f70f365d741edfba2309febfb316a"
+    },
+    "debugging-tools": {
+      "source": "AbsolutelySkilled/AbsolutelySkilled",
+      "sourceType": "github",
+      "computedHash": "a5495ae72842e394d515f9394c25a63ee29435172ed685863adc92cf2b1dc6e0"
+    },
+    "developer-advocacy": {
+      "source": "AbsolutelySkilled/AbsolutelySkilled",
+      "sourceType": "github",
+      "computedHash": "58ff215244e018fab3c5597516a3752faf93aaa0fcf962d6a42854c47e113a48"
+    },
+    "developer-experience": {
+      "source": "AbsolutelySkilled/AbsolutelySkilled",
+      "sourceType": "github",
+      "computedHash": "5bc71da0f6cf4676aa53076e6f78f5c9c4207cf09247fced0ab956e7b8862c3d"
+    },
+    "docker-kubernetes": {
+      "source": "AbsolutelySkilled/AbsolutelySkilled",
+      "sourceType": "github",
+      "computedHash": "eda4b60a3e4fe9342dc43187293ab6af5d9dcdb74be4bb09aa6db6b0f0de7a33"
+    },
+    "edge-computing": {
+      "source": "AbsolutelySkilled/AbsolutelySkilled",
+      "sourceType": "github",
+      "computedHash": "95921bdb8f00b822d91083677d75bdc6eb288d6d91d4854bc637da04f5f1f454"
+    },
+    "email-deliverability": {
+      "source": "AbsolutelySkilled/AbsolutelySkilled",
+      "sourceType": "github",
+      "computedHash": "9141bcf5b46fab0fbe5459f52035046e0bbf58318e821c03d592544b315d4796"
+    },
+    "email-marketing": {
+      "source": "AbsolutelySkilled/AbsolutelySkilled",
+      "sourceType": "github",
+      "computedHash": "2a8a51cffe605c4a314bb89e1edd8523ad3f6e5bebfea76484857aceda906cfb"
+    },
+    "employee-engagement": {
+      "source": "AbsolutelySkilled/AbsolutelySkilled",
+      "sourceType": "github",
+      "computedHash": "6a430fbcf78657cc434db9c0844832f47fe6ad7af2c54198ac2c7de72b240e07"
+    },
+    "employment-law": {
+      "source": "AbsolutelySkilled/AbsolutelySkilled",
+      "sourceType": "github",
+      "computedHash": "a19ca05595527e439708673a71bcb962a1dc3e810097010e6f2fecdf5bd8b8cd"
+    },
+    "event-driven-architecture": {
+      "source": "AbsolutelySkilled/AbsolutelySkilled",
+      "sourceType": "github",
+      "computedHash": "ed25eb92df24a47d821eacf2c1e90d9b069b4ea6e6a381723084f5eda584ca0f"
+    },
+    "figma-to-code": {
+      "source": "AbsolutelySkilled/AbsolutelySkilled",
+      "sourceType": "github",
+      "computedHash": "f8deb00c17a54d477bc0a5ad3740324cf57ba6c2998b2c42ea423b320ab6cd64"
+    },
+    "financial-modeling": {
+      "source": "AbsolutelySkilled/AbsolutelySkilled",
+      "sourceType": "github",
+      "computedHash": "6a7ed728b38c1ec918931832f4a7af3bef7b4e5ec3f07619db9625994ea4836d"
+    },
+    "financial-reporting": {
+      "source": "AbsolutelySkilled/AbsolutelySkilled",
+      "sourceType": "github",
+      "computedHash": "e1a2fe95a78b4ac989b12035f1cd2afa200f65d5245c70872d1f5534c7c4d17d"
+    },
+    "frontend-developer": {
+      "source": "AbsolutelySkilled/AbsolutelySkilled",
+      "sourceType": "github",
+      "computedHash": "0c7da9cfb4ea11051435bb44a3c694cdc247404efbbc17759823ad9c1068c386"
+    },
+    "game-audio": {
+      "source": "AbsolutelySkilled/AbsolutelySkilled",
+      "sourceType": "github",
+      "computedHash": "ccb720520406042474a967103476f78541cd14d7e600497a58339da21c2a42bc"
+    },
+    "game-balancing": {
+      "source": "AbsolutelySkilled/AbsolutelySkilled",
+      "sourceType": "github",
+      "computedHash": "500375b352c7e4a7dc044f72677c6dc5e73c4548ef4d358027f7b7feb811962d"
+    },
+    "game-design-patterns": {
+      "source": "AbsolutelySkilled/AbsolutelySkilled",
+      "sourceType": "github",
+      "computedHash": "547b7c6217be280ff7ba669599145296759bc76ddc406eba9e9508ecf5e59fea"
+    },
+    "git-advanced": {
+      "source": "AbsolutelySkilled/AbsolutelySkilled",
+      "sourceType": "github",
+      "computedHash": "08a32f7598321306deeecc01eada30a34d1a0bb6e153b224201c05622fcfb098"
+    },
+    "growth-hacking": {
+      "source": "AbsolutelySkilled/AbsolutelySkilled",
+      "sourceType": "github",
+      "computedHash": "4dd7384504eaf183dd224154420cb7749cee00959eaa750e5ce3954fd5ee9e1c"
+    },
+    "incident-management": {
+      "source": "AbsolutelySkilled/AbsolutelySkilled",
+      "sourceType": "github",
+      "computedHash": "725c0d066d290591f7e1bd8fa82d1a5ac8981e1c0456cd0d45024fe24c69d1d9"
+    },
+    "internal-docs": {
+      "source": "AbsolutelySkilled/AbsolutelySkilled",
+      "sourceType": "github",
+      "computedHash": "ab4067f2ba13c59961a76fd541287a67ee007ef0f7545d734c05d2e349491bd3"
+    },
+    "interview-design": {
+      "source": "AbsolutelySkilled/AbsolutelySkilled",
+      "sourceType": "github",
+      "computedHash": "9c9f1596e2943be8b91ab68a5bd04053010279adf743a40b36f7a928b1c69fae"
+    },
+    "ios-swift": {
+      "source": "AbsolutelySkilled/AbsolutelySkilled",
+      "sourceType": "github",
+      "computedHash": "2e5ad6a4dae742a29d2c7e4a55f66ca174b07bffb53f80c76715db3412692e72"
+    },
+    "ip-management": {
+      "source": "AbsolutelySkilled/AbsolutelySkilled",
+      "sourceType": "github",
+      "computedHash": "8a3e86ea8478bc9d045bc83a75c62b163ecd6013be36b051567ca898f397433d"
+    },
+    "jest-vitest": {
+      "source": "AbsolutelySkilled/AbsolutelySkilled",
+      "sourceType": "github",
+      "computedHash": "cde3cf5f959845d66eb4bfd9f9b5f695af51ee2da351d960cda9012c837dafb1"
+    },
+    "keyword-research": {
+      "source": "AbsolutelySkilled/AbsolutelySkilled",
+      "sourceType": "github",
+      "computedHash": "b953b9f099c39bcac02a5e751562ba1b87bc7abbe0afd83e3882a586b3ac4306"
+    },
+    "knowledge-base": {
+      "source": "AbsolutelySkilled/AbsolutelySkilled",
+      "sourceType": "github",
+      "computedHash": "9699e591ce756e1086770ec6a90073027ef87b3bb538b5225440c89a4cf13ebf"
+    },
+    "lead-scoring": {
+      "source": "AbsolutelySkilled/AbsolutelySkilled",
+      "sourceType": "github",
+      "computedHash": "3083219325b2a63dfb8618cecd9077f198e71db1a0567a892cfda9686ece1169"
+    },
+    "linux-admin": {
+      "source": "AbsolutelySkilled/AbsolutelySkilled",
+      "sourceType": "github",
+      "computedHash": "68d439837e93108a26f871c993b7d746f4a1d4a56aa6917c06cc7615875667a1"
+    },
+    "live-dependency-resolver": {
+      "source": "AbsolutelySkilled/AbsolutelySkilled",
+      "sourceType": "github",
+      "computedHash": "0ee09d16167e79893b0c7e67a9ba402f50d1447af2a3bea9e026a0ba536bf273"
+    },
+    "llm-app-development": {
+      "source": "AbsolutelySkilled/AbsolutelySkilled",
+      "sourceType": "github",
+      "computedHash": "327519458a14011684035bd99d59b2e86d025aaed84b1f4a95f8744ca4633e5f"
+    },
+    "load-testing": {
+      "source": "AbsolutelySkilled/AbsolutelySkilled",
+      "sourceType": "github",
+      "computedHash": "b6b2e157c3d0b8b65bc8b23b45cad07e4f2e84c915803bde6d06de87a8a222cf"
+    },
+    "localization-i18n": {
+      "source": "AbsolutelySkilled/AbsolutelySkilled",
+      "sourceType": "github",
+      "computedHash": "59f67dad231fe9269b43b23301955ca28913c83708ede14b2de5ef04a4a11cc7"
+    },
+    "mastra": {
+      "source": "AbsolutelySkilled/AbsolutelySkilled",
+      "sourceType": "github",
+      "computedHash": "5d0a7f4b7f94c8c038299ddfaceb0f14a0a3bf53f3b58a1b7c018f9037ebbb8e"
+    },
+    "meta-repo": {
+      "source": "AbsolutelySkilled/AbsolutelySkilled",
+      "sourceType": "github",
+      "computedHash": "2280645fb45e32014e9f984fd1d1451ec831d298fd865112932988b866e67d26"
+    },
+    "microservices": {
+      "source": "AbsolutelySkilled/AbsolutelySkilled",
+      "sourceType": "github",
+      "computedHash": "e5cd111d8bd862b1cdd7419f0475727bd7c4f89a1dacec797d6fda1bb01b481b"
+    },
+    "ml-ops": {
+      "source": "AbsolutelySkilled/AbsolutelySkilled",
+      "sourceType": "github",
+      "computedHash": "1d65761186ab86407fb967ceaab5e6ccacdebfe000729a4ca605a3631b765b45"
+    },
+    "mobile-testing": {
+      "source": "AbsolutelySkilled/AbsolutelySkilled",
+      "sourceType": "github",
+      "computedHash": "456d801c7d22ecb441607388666eacec03740691b26934620719916447b1c2ce"
+    },
+    "monorepo-management": {
+      "source": "AbsolutelySkilled/AbsolutelySkilled",
+      "sourceType": "github",
+      "computedHash": "420e159ee9fcd148656dae13e0765c44f930cc773addf777f6dc7a24a1a29cc9"
+    },
+    "nlp-engineering": {
+      "source": "AbsolutelySkilled/AbsolutelySkilled",
+      "sourceType": "github",
+      "computedHash": "db35ede608ebcfb94f4f55ca645be10aeace855cedfa94dbdd48da3b40f72203"
+    },
+    "no-code-automation": {
+      "source": "AbsolutelySkilled/AbsolutelySkilled",
+      "sourceType": "github",
+      "computedHash": "af89476aaa3f7ffdfacd30e7a27a65de62ab5df23c65bd8ce621ff98e20ccb65"
+    },
+    "observability": {
+      "source": "AbsolutelySkilled/AbsolutelySkilled",
+      "sourceType": "github",
+      "computedHash": "40271eb5fb7471bb1a279ddb590f84c589d3063daef155552d15d5b3cfe5e5be"
+    },
+    "onboarding": {
+      "source": "AbsolutelySkilled/AbsolutelySkilled",
+      "sourceType": "github",
+      "computedHash": "4bfd558cdf071525476502343602d13f0aa4a3d62b6602d77a12ee8f88f367db"
+    },
+    "open-source-management": {
+      "source": "AbsolutelySkilled/AbsolutelySkilled",
+      "sourceType": "github",
+      "computedHash": "1c9c025a035e356fa4ece290c4b0184e758bee9b3b176188357e7a5b3512224c"
+    },
+    "partnership-strategy": {
+      "source": "AbsolutelySkilled/AbsolutelySkilled",
+      "sourceType": "github",
+      "computedHash": "b5698440e38e0c052ccc60b78ad4717c7403bfcd947d7b0f7f265527ad0e38ed"
+    },
+    "penetration-testing": {
+      "source": "AbsolutelySkilled/AbsolutelySkilled",
+      "sourceType": "github",
+      "computedHash": "6ede4d0ba3f6361ec420d072b2f193f321de1b86289147032ce731f7cc3baf57"
+    },
+    "performance-engineering": {
+      "source": "AbsolutelySkilled/AbsolutelySkilled",
+      "sourceType": "github",
+      "computedHash": "73bf559670df87589d16d659bcea84582bf4db2e027908c486615fc0ebd01f59"
+    },
+    "performance-management": {
+      "source": "AbsolutelySkilled/AbsolutelySkilled",
+      "sourceType": "github",
+      "computedHash": "d22ad895490434b050e8868892714c7973802bd9bc8a95a1aa279955bf0d820d"
+    },
+    "pixel-art-sprites": {
+      "source": "AbsolutelySkilled/AbsolutelySkilled",
+      "sourceType": "github",
+      "computedHash": "48af0383cd02fc54a0d06c421da7885de8a5fc1887bb842f5a48c0e956e60482"
+    },
+    "playwright-testing": {
+      "source": "AbsolutelySkilled/AbsolutelySkilled",
+      "sourceType": "github",
+      "computedHash": "d68ea03a9cc74c6841abffede7cb3ba098bd548665a8cce67cb9730c1ba1dc60"
+    },
+    "posthog": {
+      "source": "AbsolutelySkilled/AbsolutelySkilled",
+      "sourceType": "github",
+      "computedHash": "efdbc569b1caa3b6efe81d172478b752cd97675f87be35907b401e1cef71bd23"
+    },
+    "presentation-design": {
+      "source": "AbsolutelySkilled/AbsolutelySkilled",
+      "sourceType": "github",
+      "computedHash": "7ccbcd3c40bf0f431c595ebfd1e837705a07c1fc7c10a853777c9610ba290a69"
+    },
+    "pricing-strategy": {
+      "source": "AbsolutelySkilled/AbsolutelySkilled",
+      "sourceType": "github",
+      "computedHash": "1b060cb15369bb266ee9faa6df19cca2e344ffcb3f6cd451ff2b43ede0266a68"
+    },
+    "privacy-compliance": {
+      "source": "AbsolutelySkilled/AbsolutelySkilled",
+      "sourceType": "github",
+      "computedHash": "37b7b293a465422628bc0d819191e452193909b99437ddf6f4a4d675cce73c5f"
+    },
+    "product-analytics": {
+      "source": "AbsolutelySkilled/AbsolutelySkilled",
+      "sourceType": "github",
+      "computedHash": "f42fcb23075e0df74fb45d27ea01c5cb8fedaaa11b74d31aaae8f91b0df0a0ee"
+    },
+    "product-discovery": {
+      "source": "AbsolutelySkilled/AbsolutelySkilled",
+      "sourceType": "github",
+      "computedHash": "e96588ee091319f375cf2b6bbfe9478db058cea8bd23a7d7f9854d67dd810908"
+    },
+    "product-launch": {
+      "source": "AbsolutelySkilled/AbsolutelySkilled",
+      "sourceType": "github",
+      "computedHash": "8d1ff18837e3ecd957d85ce4a4325035d8eb45b1aff44af4d2d4023aa71f2371"
+    },
+    "product-strategy": {
+      "source": "AbsolutelySkilled/AbsolutelySkilled",
+      "sourceType": "github",
+      "computedHash": "d88f52d2b45ecbb8d2b55da9e3799ade74a1e2a773339cb5bd9ba4909c46d1e0"
+    },
+    "project-execution": {
+      "source": "AbsolutelySkilled/AbsolutelySkilled",
+      "sourceType": "github",
+      "computedHash": "8fcace8a2b73ab4573fd3b50c1ff65032b71937f1663d5a3ebca80ab86f792e8"
+    },
+    "prompt-engineering": {
+      "source": "AbsolutelySkilled/AbsolutelySkilled",
+      "sourceType": "github",
+      "computedHash": "6e5f0269afa3530db2a80689b9181b09f71747d56b3d38d6c5bb3089853327d5"
+    },
+    "proposal-writing": {
+      "source": "AbsolutelySkilled/AbsolutelySkilled",
+      "sourceType": "github",
+      "computedHash": "e59971d41a9a686170754f04041e4d258787d6ab21fdb57143ec80f7fe284dd1"
+    },
+    "react-ink": {
+      "source": "AbsolutelySkilled/AbsolutelySkilled",
+      "sourceType": "github",
+      "computedHash": "259dc961f90bfb5048c2361aaf0279e269e4e51a92c1afda7940a12113ac961f"
+    },
+    "react-native": {
+      "source": "AbsolutelySkilled/AbsolutelySkilled",
+      "sourceType": "github",
+      "computedHash": "19463a865c78a9c80a3bb8c2ba58ae8948ca0eee1d517e26432920082ec5ce41"
+    },
+    "real-time-streaming": {
+      "source": "AbsolutelySkilled/AbsolutelySkilled",
+      "sourceType": "github",
+      "computedHash": "72df0dc9ab5bc5417f5f2ef921668e3c47602e5348e215a3347aeb06f3792930"
+    },
+    "recruiting-ops": {
+      "source": "AbsolutelySkilled/AbsolutelySkilled",
+      "sourceType": "github",
+      "computedHash": "4ceed1e21c55c14fe4ffbd193e9de9168607338685f548e12b7af366aeb79a05"
+    },
+    "refactoring-patterns": {
+      "source": "AbsolutelySkilled/AbsolutelySkilled",
+      "sourceType": "github",
+      "computedHash": "17089bf40cc5cc7c0b171fe29685937b680cec447e4b8d70e72af9fe9fe4d2bd"
+    },
+    "regex-mastery": {
+      "source": "AbsolutelySkilled/AbsolutelySkilled",
+      "sourceType": "github",
+      "computedHash": "1bb1017f13a481a4602c8f406c03b223ecd3e24ba627d3002982aaa66517f67b"
+    },
+    "regulatory-compliance": {
+      "source": "AbsolutelySkilled/AbsolutelySkilled",
+      "sourceType": "github",
+      "computedHash": "01ef9b01dbb846902aa46a207664cef81a88a003b913c04282c3b378179bac85"
+    },
+    "remote-collaboration": {
+      "source": "AbsolutelySkilled/AbsolutelySkilled",
+      "sourceType": "github",
+      "computedHash": "322826d2cdfda7fa400c1b8783c082c74278b06f47a4bc42af7f1e4e347eef23"
+    },
+    "remotion-video": {
+      "source": "AbsolutelySkilled/AbsolutelySkilled",
+      "sourceType": "github",
+      "computedHash": "67ff25ad5b6ef9fb6106672eb75fd662d7b4ad541bd3a35ce19a595ed21ab30e"
+    },
+    "saas-metrics": {
+      "source": "AbsolutelySkilled/AbsolutelySkilled",
+      "sourceType": "github",
+      "computedHash": "f2ee196eb5540a9e22d381eadc9fe81afaa73f9c294b368909fc28fa126fb711"
+    },
+    "sales-enablement": {
+      "source": "AbsolutelySkilled/AbsolutelySkilled",
+      "sourceType": "github",
+      "computedHash": "b961f993ac69dfaea729b434867ceda075565d140ed8dcbdcbda9b955ec87c1c"
+    },
+    "sales-playbook": {
+      "source": "AbsolutelySkilled/AbsolutelySkilled",
+      "sourceType": "github",
+      "computedHash": "c95daa30e5f2feefa22db3ba07d62ecd659cb34bf674a9e445423bac7b46f1b9"
+    },
+    "second-brain": {
+      "source": "AbsolutelySkilled/AbsolutelySkilled",
+      "sourceType": "github",
+      "computedHash": "57dbdfb1af943a58c6ccf65971341925c6e62ff646f321b9a1f75a8cd187fd18"
+    },
+    "security-incident-response": {
+      "source": "AbsolutelySkilled/AbsolutelySkilled",
+      "sourceType": "github",
+      "computedHash": "0b8db5d2c093e97f372d309d1969a7cd88a2e9b6852dabeab53a527b1da3ee0a"
+    },
+    "sentry": {
+      "source": "AbsolutelySkilled/AbsolutelySkilled",
+      "sourceType": "github",
+      "computedHash": "cdc66b2c044dc632556b99ffbbd69d1a100bf42c6457110e10c697d5d2df1c1a"
+    },
+    "shell-scripting": {
+      "source": "AbsolutelySkilled/AbsolutelySkilled",
+      "sourceType": "github",
+      "computedHash": "6be4b60d2ca6fc62ecfa830da26b0a49f970292a777541fd5175e01bd21f0a0b"
+    },
+    "signoz": {
+      "source": "AbsolutelySkilled/AbsolutelySkilled",
+      "sourceType": "github",
+      "computedHash": "a84968d5296dcdfd93e42396b1aa8e4470c4180781daec5a39ff9989044af7f7"
+    },
+    "site-reliability": {
+      "source": "AbsolutelySkilled/AbsolutelySkilled",
+      "sourceType": "github",
+      "computedHash": "cf9ab0fa67c21a5afe2bf5a0e824f427d7808f219d671d830124aee5cccf3d9c"
+    },
+    "skill-audit": {
+      "source": "AbsolutelySkilled/AbsolutelySkilled",
+      "sourceType": "github",
+      "computedHash": "4f210693941ec3d7559703d3e633b122230999079892467f1e6e32b0e6d56c2e"
+    },
+    "skill-forge": {
+      "source": "AbsolutelySkilled/AbsolutelySkilled",
+      "sourceType": "github",
+      "computedHash": "e52cee36f9323d15f63c746eab158302375f082c9ff261e00e35d22148c99fe0"
+    },
+    "social-media-strategy": {
+      "source": "AbsolutelySkilled/AbsolutelySkilled",
+      "sourceType": "github",
+      "computedHash": "7ba86b2b4aae3991ac3a95b6ba98b8537d9df9323e367913fcdebe3d84c05d36"
+    },
+    "spreadsheet-modeling": {
+      "source": "AbsolutelySkilled/AbsolutelySkilled",
+      "sourceType": "github",
+      "computedHash": "7d131ed91dd4fa7ee088c920f65cb4e2419033fa5117e895b9c391b4447d7ac8"
+    },
+    "startup-fundraising": {
+      "source": "AbsolutelySkilled/AbsolutelySkilled",
+      "sourceType": "github",
+      "computedHash": "e120aca16d19ed52ff5444ecff7c9785727f6560495db33c368777eb121b82f8"
+    },
+    "supaguard": {
+      "source": "AbsolutelySkilled/AbsolutelySkilled",
+      "sourceType": "github",
+      "computedHash": "870286f052c50451cda3f57063c112cfd5b1808085c7e718bd3a472c1c7e2422"
+    },
+    "support-analytics": {
+      "source": "AbsolutelySkilled/AbsolutelySkilled",
+      "sourceType": "github",
+      "computedHash": "90607f1463162f2c48b96b75fb870d1b55b0bcafb8d0ee99e840061aef6afd21"
+    },
+    "system-design": {
+      "source": "AbsolutelySkilled/AbsolutelySkilled",
+      "sourceType": "github",
+      "computedHash": "002f6dc7501f9badf0a42593341fa1d6944e34acd57ad988c6a1326e0245db42"
+    },
+    "tax-strategy": {
+      "source": "AbsolutelySkilled/AbsolutelySkilled",
+      "sourceType": "github",
+      "computedHash": "26ac5e5aaf44c8935f6f5af66c593c0dd31ddcf05fd49ff696d20d867ad8fd81"
+    },
+    "technical-interviewing": {
+      "source": "AbsolutelySkilled/AbsolutelySkilled",
+      "sourceType": "github",
+      "computedHash": "de89dd16160313b5108ec51fe121d57bae14a9256c1123000f3192c9d23738f3"
+    },
+    "technical-writing": {
+      "source": "AbsolutelySkilled/AbsolutelySkilled",
+      "sourceType": "github",
+      "computedHash": "5ff0557e4c6c432904cd707e47ca83da2e31c04893cd3754104fd5b81c6cae09"
+    },
+    "terraform-iac": {
+      "source": "AbsolutelySkilled/AbsolutelySkilled",
+      "sourceType": "github",
+      "computedHash": "732b998aa741d6bae3273b5098d6deb1be5a75be36a5adb5b2cc75729ce2fe42"
+    },
+    "test-strategy": {
+      "source": "AbsolutelySkilled/AbsolutelySkilled",
+      "sourceType": "github",
+      "computedHash": "eceefbf551105cbf4ee4f7146093e8c81f78faebf2c048219d5a400e79d4f4de"
+    },
+    "unity-development": {
+      "source": "AbsolutelySkilled/AbsolutelySkilled",
+      "sourceType": "github",
+      "computedHash": "fc41df073bcc1656e611105e9f8bc05ebf0d987467674dbfb88671e05a4f4e93"
+    },
+    "user-stories": {
+      "source": "AbsolutelySkilled/AbsolutelySkilled",
+      "sourceType": "github",
+      "computedHash": "42f7a7b023b1f8551f317f62e97e7e3ce7027f5e7aea08356f2a5e3d1d58373c"
+    },
+    "ux-research": {
+      "source": "AbsolutelySkilled/AbsolutelySkilled",
+      "sourceType": "github",
+      "computedHash": "b1c38d273be2578c7850b21b8645523e1da3e9070c97c4643b10bc5d6f30b011"
+    },
+    "video-analyzer": {
+      "source": "AbsolutelySkilled/AbsolutelySkilled",
+      "sourceType": "github",
+      "computedHash": "a7da9846f150d7bc90cadd98ad5ae24df81199d24d41ee3df36c0f4a1b945298"
+    },
+    "video-audio-design": {
+      "source": "AbsolutelySkilled/AbsolutelySkilled",
+      "sourceType": "github",
+      "computedHash": "74cbc5622d8975a425a7a8c97eef42d9f4251355c31daf927488f260c7a4e766"
+    },
+    "video-creator": {
+      "source": "AbsolutelySkilled/AbsolutelySkilled",
+      "sourceType": "github",
+      "computedHash": "6358336c1383defbf18ad9de0359ff8dd697eef6e89c35a9e62f6108b65b6018"
+    },
+    "video-production": {
+      "source": "AbsolutelySkilled/AbsolutelySkilled",
+      "sourceType": "github",
+      "computedHash": "4eafd04ceb46f730805411956ef3f94985858230596450df64c20a85e424f857"
+    },
+    "video-scriptwriting": {
+      "source": "AbsolutelySkilled/AbsolutelySkilled",
+      "sourceType": "github",
+      "computedHash": "efc32a40217de76f16b719ba78a87a9f717c07c29b2046911f74246bd9b3c5b0"
+    },
+    "vim-neovim": {
+      "source": "AbsolutelySkilled/AbsolutelySkilled",
+      "sourceType": "github",
+      "computedHash": "64b0604adbc36d5fccad9521fae2e2f9eb376a064f432ca6d46b8ed2716fa3ec"
+    },
+    "vite-plus": {
+      "source": "AbsolutelySkilled/AbsolutelySkilled",
+      "sourceType": "github",
+      "computedHash": "0ca207da614ea478f21c056732bd2dab49697618cdb8a81022f34b5575e60bd4"
+    },
+    "web3-smart-contracts": {
+      "source": "AbsolutelySkilled/AbsolutelySkilled",
+      "sourceType": "github",
+      "computedHash": "db09743330b44b1a4c1e84dd50e812a370783ced54e0e9cd1803a50c32fd7550"
+    }
+  }
+}

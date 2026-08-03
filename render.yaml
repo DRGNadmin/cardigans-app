@@ -1,0 +1,36 @@
+# Render Blueprint: https://dashboard.render.com/select-repo?type=blueprint
+# После подключения репозитория задайте вручную: BOT_TOKEN, ADMIN_TELEGRAM_IDS
+
+databases:
+  - name: cardigans-db
+    plan: free
+    databaseName: cardigans
+    user: cardigans
+
+services:
+  - type: web
+    name: cardigans-api
+    runtime: node
+    plan: free
+    buildCommand: npm install && npm run build -w server && npm run db:deploy -w server
+    startCommand: npm run start -w server
+    healthCheckPath: /health
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: DATABASE_URL
+        fromDatabase:
+          name: cardigans-db
+          property: connectionString
+      - key: BOT_TOKEN
+        sync: false
+      - key: JWT_SECRET
+        generateValue: true
+      - key: ADMIN_JWT_SECRET
+        generateValue: true
+      - key: CORS_ORIGIN
+        value: https://drgnadmin.github.io
+      - key: TELEGRAM_BOT_USERNAME
+        value: CardigansGamingBonuses_bot
+      - key: ADMIN_TELEGRAM_IDS
+        sync: false

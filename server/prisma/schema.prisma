@@ -1,0 +1,265 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum Game {
+  CS2
+  DOTA2
+}
+
+enum ShopItemRarity {
+  restricted
+  classified
+  covert
+  contraband
+  immortal
+  arcana
+}
+
+enum MatchStatus {
+  scheduled
+  live
+  finished
+  cancelled
+}
+
+enum OrderStatus {
+  new
+  contact_sent
+  completed
+  cancelled
+}
+
+enum LedgerType {
+  prediction_reward
+  task_reward
+  purchase
+  admin_adjust
+}
+
+enum SupportTicketStatus {
+  open
+  answered
+  closed
+}
+
+enum TaskType {
+  channel_subscribe
+  predictions_count
+  predictions_game
+  manual
+  daily_login
+  weekly_streak
+  correct_streak
+  trade_url
+  onboarding
+}
+
+model User {
+  id             String   @id @default(cuid())
+  telegramId     BigInt   @unique @map("telegram_id")
+  username       String?
+  firstName      String?  @map("first_name")
+  lastName       String?  @map("last_name")
+  steamTradeUrl  String?  @map("steam_trade_url")
+  gemsBalance    Int      @default(0) @map("gems_balance")
+  xpTotal        Int      @default(0) @map("xp_total")
+  createdAt      DateTime @default(now()) @map("created_at")
+  updatedAt      DateTime @updatedAt @map("updated_at")
+  /** Антиспам: когда слали TG-напоминание «ежедневный вход доступен» */
+  lastDailyLoginReminderAt   DateTime? @map("last_daily_login_reminder_at")
+  /** Антиспам: когда слали TG-напоминание о недельной серии */
+  lastWeeklyStreakReminderAt DateTime? @map("last_weekly_streak_reminder_at")
+
+  predictions Prediction[]
+  userTasks   UserTask[]
+  orders      Order[]
+  ledger      LedgerTransaction[]
+  supportTickets SupportTicket[]
+
+  @@map("users")
+}
+
+model SupportTicket {
+  id        String              @id @default(cuid())
+  userId    String              @map("user_id")
+  message   String              @db.Text
+  adminReply String?            @map("admin_reply") @db.Text
+  status    SupportTicketStatus @default(open)
+  repliedAt DateTime?           @map("replied_at")
+  createdAt DateTime            @default(now()) @map("created_at")
+  updatedAt DateTime            @updatedAt @map("updated_at")
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@index([status])
+  @@index([createdAt])
+  @@map("support_tickets")
+}
+
+model LedgerTransaction {
+  id        String     @id @default(cuid())
+  userId    String     @map("user_id")
+  amount    Int
+  type      LedgerType
+  refType   String?    @map("ref_type")
+  refId     String?    @map("ref_id")
+  meta      Json?
+  createdAt DateTime   @default(now()) @map("created_at")
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@index([type])
+  @@map("ledger_transactions")
+}
+
+model Match {
+  id              String      @id @default(cuid())
+  game            Game
+  teamA           String      @map("team_a")
+  teamB           String      @map("team_b")
+  teamALogoUrl    String?     @map("team_a_logo_url")
+  teamBLogoUrl    String?     @map("team_b_logo_url")
+  startsAt        DateTime    @map("starts_at")
+  predictionEndsAt DateTime   @map("prediction_ends_at")
+  /** Ссылка на стрим (Twitch, YouTube и т.д.) — кнопка в комнате матча. */
+  streamUrl       String?     @map("stream_url")
+  status          MatchStatus @default(scheduled)
+  winningOptionId String?     @map("winning_option_id")
+  rewardGems      Int         @default(0) @map("reward_gems")
+  createdAt       DateTime    @default(now()) @map("created_at")
+  updatedAt       DateTime    @updatedAt @map("updated_at")
+  /** TG: напоминание «скоро старт» уже отправлено */
+  soonReminderSentAt DateTime? @map("soon_reminder_sent_at")
+  /** TG: итоги матча пользователям уже отправлены */
+  resultNotifiedAt   DateTime? @map("result_notified_at")
+  /** Мягкое удаление: матч скрыт у пользователей (лента, архив, детали). */
+  deletedAt          DateTime? @map("deleted_at")
+
+  options     PredictionOption[]
+  predictions Prediction[]
+
+  @@index([status])
+  @@index([startsAt])
+  @@index([deletedAt])
+  @@map("matches")
+}
+
+model PredictionOption {
+  id      String @id @default(cuid())
+  matchId String @map("match_id")
+  label   String
+  sort    Int    @default(0)
+
+  match       Match        @relation(fields: [matchId], references: [id], onDelete: Cascade)
+  predictions Prediction[]
+
+  @@index([matchId])
+  @@map("prediction_options")
+}
+
+model Prediction {
+  id        String   @id @default(cuid())
+  userId    String   @map("user_id")
+  matchId   String   @map("match_id")
+  optionId  String   @map("option_id")
+  rewardPaid Boolean @default(false) @map("reward_paid")
+  /** Сколько гемов начислено за этот прогноз (база матча + бонус уровня); null для старых записей до миграции */
+  rewardGemsPaid Int? @map("reward_gems_paid")
+  createdAt DateTime @default(now()) @map("created_at")
+
+  user   User             @relation(fields: [userId], references: [id], onDelete: Cascade)
+  match  Match            @relation(fields: [matchId], references: [id], onDelete: Cascade)
+  option PredictionOption @relation(fields: [optionId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, matchId])
+  @@index([matchId])
+  @@map("predictions")
+}
+
+model Task {
+  id          String   @id @default(cuid())
+  key         String?  @unique
+  title       String
+  description String?
+  rewardGems  Int      @map("reward_gems")
+  type        TaskType
+  channelId   String?  @map("channel_id")
+  /** Для type=predictions_game: CS2 или DOTA2 */
+  game        Game?
+  targetCount Int?     @map("target_count")
+  sort        Int      @default(0)
+  isActive    Boolean  @default(true) @map("is_active")
+  createdAt   DateTime @default(now()) @map("created_at")
+
+  userTasks UserTask[]
+
+  @@map("tasks")
+}
+
+model UserTask {
+  id            String    @id @default(cuid())
+  userId        String    @map("user_id")
+  taskId        String    @map("task_id")
+  progress      Int       @default(0)
+  completed     Boolean   @default(false)
+  completedAt   DateTime? @map("completed_at")
+  lastClaimedAt DateTime? @map("last_claimed_at")
+  meta          Json      @default("{}")
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  task Task @relation(fields: [taskId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, taskId])
+  @@map("user_tasks")
+}
+
+model ShopItem {
+  id        String         @id @default(cuid())
+  game      Game
+  title     String
+  rarity    ShopItemRarity @default(restricted)
+  imageUrl  String?        @map("image_url")
+  priceGems Int            @map("price_gems")
+  stock     Int
+  isActive  Boolean        @default(true) @map("is_active")
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  orders Order[]
+
+  @@map("shop_items")
+}
+
+model Order {
+  id          String      @id @default(cuid())
+  userId      String      @map("user_id")
+  shopItemId  String      @map("shop_item_id")
+  priceGems   Int         @map("price_gems")
+  status      OrderStatus @default(new)
+  createdAt   DateTime    @default(now()) @map("created_at")
+  updatedAt   DateTime    @updatedAt @map("updated_at")
+
+  user     User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  shopItem ShopItem @relation(fields: [shopItemId], references: [id], onDelete: Restrict)
+
+  @@index([status])
+  @@index([userId])
+  @@map("orders")
+}
+
+model AdminUser {
+  id           String   @id @default(cuid())
+  username     String   @unique
+  passwordHash String   @map("password_hash")
+  createdAt    DateTime @default(now()) @map("created_at")
+
+  @@map("admin_users")
+}

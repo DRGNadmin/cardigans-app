@@ -1,0 +1,39 @@
+@import url("https://fonts.cdnfonts.com/css/sansation");
+
+body {
+  margin: 0;
+  font-family: "Sansation", system-ui, sans-serif;
+  background: #0f1115;
+  color: #e8e8e8;
+}
+
+.shell {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 24px;
+}
+
+input,
+button,
+select {
+  font: inherit;
+}
+
+.card {
+  background: #1a1d24;
+  border-radius: 10px;
+  padding: 14px;
+  margin-bottom: 10px;
+}
+
+.row {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.muted {
+  color: #8a8f98;
+  font-size: 13px;
+}

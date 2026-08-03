@@ -1,0 +1,22 @@
+{
+  "name": "cardigans-app",
+  "private": true,
+  "workspaces": [
+    "server",
+    "miniapp",
+    "admin"
+  ],
+  "scripts": {
+    "db:generate": "npm run db:generate -w server",
+    "db:migrate": "npm run db:migrate -w server",
+    "db:deploy": "npm run db:deploy -w server",
+    "db:reset": "npm run db:reset -w server",
+    "db:cleanup": "npm run db:cleanup -w server",
+    "db:cleanup:all": "npm run db:cleanup:all -w server",
+    "dev:server": "npm run dev -w server",
+    "dev:miniapp": "npm run dev -w miniapp",
+    "dev:admin": "npm run dev -w admin",
+    "build": "npm run build -w server && npm run build -w miniapp && npm run build -w admin",
+    "test": "npm run test -w server"
+  }
+}
