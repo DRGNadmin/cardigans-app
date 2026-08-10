@@ -1,0 +1,145 @@
+@import "tailwindcss";
+
+:root {
+  --bg: #000000;
+  --fg: #ffffff;
+  --violet: #7946e2;
+  --violet-muted: rgba(121, 70, 226, 0.35);
+  --lime: #00ff00;
+  --cyan: #00e6ff;
+  --pink: #ff006e;
+  --yellow: #ffd31c;
+  --orange: #fb5608;
+  --muted: rgba(255, 255, 255, 0.62);
+  --line: rgba(255, 255, 255, 0.12);
+  --panel: rgba(255, 255, 255, 0.04);
+  --font-display: "Oswald", "Arial Narrow", sans-serif;
+  --font-body: "Montserrat", system-ui, sans-serif;
+}
+
+@theme inline {
+  --color-background: var(--bg);
+  --color-foreground: var(--fg);
+  --color-violet: var(--violet);
+  --font-sans: var(--font-body);
+  --font-display: var(--font-display);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  min-height: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+}
+
+.font-display {
+  font-family: var(--font-display);
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.brand-zigzag {
+  background:
+    radial-gradient(ellipse 80% 50% at 10% 90%, var(--violet-muted), transparent 55%),
+    radial-gradient(ellipse 70% 45% at 90% 10%, var(--violet-muted), transparent 50%),
+    #000;
+}
+
+.match-node {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  backdrop-filter: blur(8px);
+  overflow: hidden;
+}
+
+.sticker-float {
+  animation: sticker-bob 4.5s ease-in-out infinite;
+}
+
+@keyframes sticker-bob {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-6px);
+  }
+}
+
+.match-node[data-live="true"] {
+  border-color: color-mix(in srgb, var(--disc, var(--violet)) 70%, white);
+}
+
+.focus-ring:focus-visible {
+  outline: 2px solid var(--violet);
+  outline-offset: 3px;
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-rise {
+  animation: rise 0.45s ease-out both;
+}
+
+.bracket-shell {
+  overflow: hidden;
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.04),
+    0 20px 50px rgba(0, 0, 0, 0.35);
+}
+
+.bracket-viewport {
+  background:
+    radial-gradient(ellipse 60% 50% at 10% 20%, color-mix(in srgb, var(--disc, var(--violet)) 14%, transparent), transparent 60%),
+    radial-gradient(ellipse 50% 40% at 90% 80%, rgba(121, 70, 226, 0.12), transparent 55%),
+    rgba(0, 0, 0, 0.35);
+  overscroll-behavior: contain;
+}
+
+.bracket-nav {
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.02), transparent);
+}
+
+/* Hide any leftover native scrollbars in bracket areas */
+.bracket-viewport::-webkit-scrollbar {
+  display: none;
+}
+
+@media (max-width: 640px) {
+  .bracket-viewport {
+    height: min(62vh, 520px);
+  }
+}

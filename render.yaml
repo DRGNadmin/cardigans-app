@@ -34,3 +34,24 @@ services:
         value: CardigansGamingBonuses_bot
       - key: ADMIN_TELEGRAM_IDS
         sync: false
+
+  # Phugytal — публичный сайт-информатор + админка
+  - type: web
+    name: phugytal
+    runtime: node
+    plan: free
+    rootDir: phugytal
+    buildCommand: npm ci --include=dev && npx prisma generate && npm run build
+    startCommand: npm run start:prod
+    healthCheckPath: /api/health
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: DATABASE_URL
+        value: file:./prod.db
+      - key: SESSION_SECRET
+        generateValue: true
+      - key: ADMIN_EMAIL
+        value: admin@phugytal.local
+      - key: ADMIN_PASSWORD
+        value: ChangeMeAdmin123!

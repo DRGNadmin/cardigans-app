@@ -1,0 +1,151 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+enum Role {
+  SUPER_ADMIN
+  DISCIPLINE_ADMIN
+}
+
+enum TournamentFormat {
+  SINGLE_ELIMINATION
+  DOUBLE_ELIMINATION
+  ROUND_ROBIN
+  SWISS
+  GROUPS_PLAYOFFS
+}
+
+enum TournamentStatus {
+  DRAFT
+  ACTIVE
+  COMPLETED
+}
+
+enum RoundKind {
+  WB
+  LB
+  FINAL
+  GROUP
+  SWISS
+  PLAYOFF
+}
+
+model User {
+  id           String            @id @default(cuid())
+  email        String            @unique
+  passwordHash String
+  name         String?
+  role         Role              @default(DISCIPLINE_ADMIN)
+  createdAt    DateTime          @default(now())
+  updatedAt    DateTime          @updatedAt
+  disciplines  DisciplineAdmin[]
+  sessions     Session[]
+}
+
+model Session {
+  id        String   @id @default(cuid())
+  tokenHash String   @unique
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  expiresAt DateTime
+  createdAt DateTime @default(now())
+}
+
+model DisciplineAdmin {
+  id             String @id @default(cuid())
+  userId         String
+  user           User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  disciplineSlug String
+
+  @@unique([userId, disciplineSlug])
+  @@index([disciplineSlug])
+}
+
+model Tournament {
+  id           String           @id @default(cuid())
+  discipline   String
+  name         String
+  format       TournamentFormat
+  status       TournamentStatus @default(DRAFT)
+  settingsJson String           @default("{}")
+  createdAt    DateTime         @default(now())
+  updatedAt    DateTime         @updatedAt
+  participants Participant[]
+  rounds       Round[]
+  matches      Match[]
+  groups       Group[]
+
+  @@index([discipline])
+}
+
+model Participant {
+  id           String      @id @default(cuid())
+  tournamentId String
+  tournament   Tournament  @relation(fields: [tournamentId], references: [id], onDelete: Cascade)
+  name         String
+  seed         Int
+  groupId      String?
+  group        Group?      @relation(fields: [groupId], references: [id])
+  createdAt    DateTime    @default(now())
+
+  @@unique([tournamentId, seed])
+  @@index([tournamentId])
+}
+
+model Group {
+  id           String        @id @default(cuid())
+  tournamentId String
+  tournament   Tournament    @relation(fields: [tournamentId], references: [id], onDelete: Cascade)
+  name         String
+  order        Int
+  participants Participant[]
+  matches      Match[]
+
+  @@index([tournamentId])
+}
+
+model Round {
+  id           String     @id @default(cuid())
+  tournamentId String
+  tournament   Tournament @relation(fields: [tournamentId], references: [id], onDelete: Cascade)
+  name         String
+  kind         RoundKind
+  order        Int
+  matches      Match[]
+
+  @@index([tournamentId])
+}
+
+model Match {
+  id              String        @id @default(cuid())
+  tournamentId    String
+  tournament      Tournament    @relation(fields: [tournamentId], references: [id], onDelete: Cascade)
+  roundId         String
+  round           Round         @relation(fields: [roundId], references: [id], onDelete: Cascade)
+  groupId         String?
+  group           Group?        @relation(fields: [groupId], references: [id])
+  orderInRound    Int
+  participant1Id  String?
+  participant2Id  String?
+  score1          Int?
+  score2          Int?
+  winnerId        String?
+  scheduledAt     DateTime?
+  venue           String?
+  nextMatchId     String?
+  nextSlot        Int?
+  loserNextMatchId String?
+  loserNextSlot   Int?
+  isBye           Boolean       @default(false)
+  createdAt       DateTime      @default(now())
+  updatedAt       DateTime      @updatedAt
+
+  @@index([tournamentId])
+  @@index([roundId])
+  @@index([scheduledAt])
+}
