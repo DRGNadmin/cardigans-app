@@ -1,4 +1,4 @@
-import type { GeneratedMatch, GeneratedRound } from "./types";
+import type { GeneratedMatch } from "./types";
 
 /**
  * Professional-style playoff feeds from group standings.
@@ -173,10 +173,7 @@ export function assignGeneratedMatchNumbers(
  * Fill empty bracket slots with winner/loser feed labels ("Поб. M3" / "Проигр. M3").
  * Numbering is continuous across the whole tournament (byes excluded).
  */
-export function annotateAdvancementLabels(
-  matches: GeneratedMatch[],
-  _rounds: GeneratedRound[],
-) {
+export function annotateAdvancementLabels(matches: GeneratedMatch[]) {
   const byTemp = new Map(matches.map((m) => [m.tempId, m]));
   const numByTemp = assignGeneratedMatchNumbers(matches);
   const ordered = [...matches].sort((a, b) => {

@@ -31,12 +31,22 @@ export default async function SchedulePage({
       <section className="mx-auto max-w-[1400px] px-4 pb-6 pt-5 md:px-6 lg:px-8">
         <Link
           href={`/d/${slug}`}
-          className="focus-ring text-sm text-white/55 hover:text-white"
+          className="focus-ring inline-flex items-center rounded-[10px] border bg-black/40 px-3.5 py-2.5 text-sm font-medium backdrop-blur-sm transition hover:bg-black/55"
+          style={{
+            borderColor: `color-mix(in srgb, ${discipline.color} 55%, transparent)`,
+            color: discipline.color,
+            boxShadow: `inset 0 0 0 1px color-mix(in srgb, ${discipline.color} 18%, transparent)`,
+          }}
         >
-          ← К сетке {discipline.name}
+          <span className="uppercase tracking-[0.12em]">
+            К сетке{" "}
+            <span className="font-display tracking-normal normal-case">
+              {discipline.shortName || discipline.name}
+            </span>
+          </span>
         </Link>
         <h1
-          className="font-display mt-4 text-5xl md:text-6xl"
+          className="font-display mt-5 text-5xl md:text-6xl"
           style={{ color: discipline.color }}
         >
           Расписание

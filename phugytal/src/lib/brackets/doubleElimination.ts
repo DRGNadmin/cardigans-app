@@ -107,6 +107,6 @@ export function generateDoubleElimination(participantCount: number): GeneratedBr
       m.slotLabel2 = undefined;
     }
   }
-  annotateAdvancementLabels(matches, rounds);
+  annotateAdvancementLabels(matches);
   return { rounds, matches };
 }

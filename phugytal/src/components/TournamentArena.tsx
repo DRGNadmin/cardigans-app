@@ -374,8 +374,8 @@ export function TournamentArena({
       className="ui-panel space-y-4 overflow-hidden p-3 sm:p-4"
       style={{ ["--disc" as string]: accent }}
     >
-      <div className="flex flex-wrap items-end justify-between gap-3 border-b border-white/10 px-1 pb-1">
-        <div>
+      <div className="flex flex-wrap items-start justify-between gap-3 border-b border-white/10 px-1 pb-3">
+        <div className="min-w-0 flex-1">
           {title ? (
             <div className="mb-1">
               <h2
@@ -407,23 +407,35 @@ export function TournamentArena({
                 Плей-офф
               </TabBtn>
             ) : null}
-            {scheduleHref ? (
-              <Link href={scheduleHref} className="focus-ring ui-tab" data-active="false">
-                Расписание
-              </Link>
-            ) : null}
           </div>
         </div>
-        {canEdit && hasGroups ? (
-          <button
-            type="button"
-            disabled={busy}
-            onClick={() => void qualify()}
-            className="focus-ring btn-ghost text-[0.65rem]"
-          >
-            Заполнить плей-офф (топ-2)
-          </button>
-        ) : null}
+
+        <div className="ml-auto flex shrink-0 flex-col items-end gap-2">
+          {scheduleHref ? (
+            <Link
+              href={scheduleHref}
+              className="focus-ring inline-flex items-center rounded-[10px] border px-3.5 py-2 text-[11px] font-bold uppercase tracking-[0.14em] transition hover:brightness-110"
+              style={{
+                color: "#000",
+                background: accent,
+                borderColor: accent,
+                boxShadow: `0 0 18px color-mix(in srgb, ${accent} 35%, transparent)`,
+              }}
+            >
+              Расписание
+            </Link>
+          ) : null}
+          {canEdit && hasGroups ? (
+            <button
+              type="button"
+              disabled={busy}
+              onClick={() => void qualify()}
+              className="focus-ring btn-ghost text-[0.65rem]"
+            >
+              Заполнить плей-офф (топ-2)
+            </button>
+          ) : null}
+        </div>
       </div>
 
       {tab === "groups" && hasGroups ? (

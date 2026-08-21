@@ -136,7 +136,6 @@ export function TeamSearch({ accent }: { accent?: string }) {
             aria-label="Поиск команды"
             aria-autocomplete="list"
             aria-controls={listId}
-            aria-expanded={open && hits.length > 0}
             className="min-w-0 flex-1 bg-transparent text-sm text-white outline-none placeholder:text-white/35"
           />
         </div>
@@ -177,7 +176,7 @@ export function TeamSearch({ accent }: { accent?: string }) {
               </li>
             ) : null}
             {hits.map((hit) => (
-              <li key={hit.id} role="option">
+              <li key={hit.id} role="option" aria-selected="false">
                 <button
                   type="button"
                   className="focus-ring flex w-full items-start gap-3 px-3 py-2.5 text-left transition hover:bg-white/[0.06]"

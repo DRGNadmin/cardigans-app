@@ -291,7 +291,7 @@ export function generateGroupsPlayoffs(
       m.slotLabel2 = undefined;
     }
   }
-  annotateAdvancementLabels(matches, rounds);
+  annotateAdvancementLabels(matches);
 
   return { rounds, matches, groups };
 }
@@ -362,6 +362,6 @@ function buildPlayoffOnly(
       m.slotLabel2 = undefined;
     }
   }
-  annotateAdvancementLabels(matches, rounds);
+  annotateAdvancementLabels(matches);
   return { rounds, matches };
 }

@@ -72,6 +72,6 @@ export function generateSingleElimination(participantCount: number): GeneratedBr
     matchIdsByRound.push(ids);
   }
 
-  annotateAdvancementLabels(matches, rounds);
+  annotateAdvancementLabels(matches);
   return { rounds, matches };
 }
