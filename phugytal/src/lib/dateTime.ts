@@ -41,3 +41,10 @@ export function formatMatchDateTime(value: string | Date): string {
   if (Number.isNaN(d.getTime())) return "—";
   return format(d, "d MMMM yyyy, HH:mm", { locale: ru });
 }
+
+/** Compact for sidebar: «25 сен, 23:00» */
+export function formatMatchDateShort(value: string | Date): string {
+  const d = typeof value === "string" ? new Date(value) : value;
+  if (Number.isNaN(d.getTime())) return "—";
+  return format(d, "d MMM, HH:mm", { locale: ru });
+}

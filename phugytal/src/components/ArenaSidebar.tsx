@@ -1,7 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useRef, useState } from "react";
-import { formatMatchDateTime } from "@/lib/dateTime";
+import { formatMatchDateShort, formatMatchDateTime } from "@/lib/dateTime";
 import {
   assignMatchNumbers,
   compareScheduleRows,
@@ -62,6 +62,24 @@ function buildRows(data: SerializedTournament): Row[] {
     .sort(compareScheduleRows);
 }
 
+/** Next by schedule time; if all past — most recent; else live / first. */
+function pickNearestMatch(rows: Row[]): Row | null {
+  if (!rows.length) return null;
+  const now = Date.now();
+  const timed = rows
+    .filter((r) => r.scheduledAt)
+    .map((r) => ({ r, t: new Date(r.scheduledAt!).getTime() }))
+    .filter((x) => Number.isFinite(x.t));
+
+  const upcoming = timed.filter((x) => x.t >= now).sort((a, b) => a.t - b.t);
+  if (upcoming[0]) return upcoming[0].r;
+
+  const past = [...timed].sort((a, b) => b.t - a.t);
+  if (past[0]) return past[0].r;
+
+  return rows.find((r) => r.isLive) ?? rows[0] ?? null;
+}
+
 export function ArenaSidebar({
   data: initial,
   accent,
@@ -74,13 +92,10 @@ export function ArenaSidebar({
   highlightTeamId?: string | null;
 }) {
   const [data, setData] = useState(initial);
+  const [, setTick] = useState(0);
   const listRef = useRef<HTMLUListElement>(null);
   const rows = buildRows(data);
-  const featured =
-    rows.find((r) => r.isLive) ??
-    rows.find((r) => r.scheduledAt) ??
-    rows[0] ??
-    null;
+  const featured = pickNearestMatch(rows);
   const stream = featured?.streamUrl || data.streamUrl;
 
   const refresh = useCallback(async () => {
@@ -94,6 +109,11 @@ export function ArenaSidebar({
   useEffect(() => {
     setData(initial);
   }, [initial]);
+
+  useEffect(() => {
+    const id = setInterval(() => setTick((n) => n + 1), 60_000);
+    return () => clearInterval(id);
+  }, []);
 
   useEffect(() => {
     const es = new EventSource(`/api/events/tournament/${initial.id}`);
@@ -288,16 +308,16 @@ export function ArenaSidebar({
                       >
                         Live
                       </span>
-                    ) : (
-                      <span className="text-[11px] tabular-nums text-white/45">
-                        {r.scheduledAt
-                          ? new Date(r.scheduledAt).toLocaleTimeString("ru-RU", {
-                              hour: "2-digit",
-                              minute: "2-digit",
-                            })
-                          : "—"}
-                      </span>
-                    )}
+                    ) : null}
+                    <span
+                      className={`block text-[11px] tabular-nums text-white/45 ${
+                        r.isLive ? "mt-0.5" : ""
+                      }`}
+                    >
+                      {r.scheduledAt
+                        ? formatMatchDateShort(r.scheduledAt)
+                        : "—"}
+                    </span>
                     {r.score1 != null && r.score2 != null ? (
                       <p className="mt-0.5 text-xs tabular-nums text-white/70">
                         {r.score1}:{r.score2}

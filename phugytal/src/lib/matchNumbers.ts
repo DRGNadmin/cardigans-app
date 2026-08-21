@@ -48,7 +48,7 @@ export function matchDisplayName(
   return "TBD";
 }
 
-/** Live first → scheduled time → match number (bracket order when times equal/missing). */
+/** Scheduled time → match number (unscheduled last). */
 export function compareScheduleRows(
   a: {
     isLive?: boolean;
@@ -61,8 +61,6 @@ export function compareScheduleRows(
     matchNo: number | null;
   },
 ): number {
-  if (a.isLive && !b.isLive) return -1;
-  if (!a.isLive && b.isLive) return 1;
   const ta = a.scheduledAt ? new Date(a.scheduledAt).getTime() : Infinity;
   const tb = b.scheduledAt ? new Date(b.scheduledAt).getTime() : Infinity;
   if (ta !== tb) return ta - tb;
