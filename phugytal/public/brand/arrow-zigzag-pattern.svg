@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="700" viewBox="0 0 900 700" fill="none">
+  <defs>
+    <!-- chalk / dry-brush grain on strokes -->
+    <filter id="chalk" x="-5%" y="-5%" width="110%" height="110%">
+      <feTurbulence type="fractalNoise" baseFrequency="1.15" numOctaves="3" seed="7" result="n"/>
+      <feDisplacementMap in="SourceGraphic" in2="n" scale="3.2" xChannelSelector="R" yChannelSelector="G"/>
+      <feGaussianBlur stdDeviation="0.35"/>
+    </filter>
+    <filter id="fade">
+      <feGaussianBlur stdDeviation="0.8"/>
+    </filter>
+  </defs>
+
+  <!-- Very low-contrast dark plum zigzags — brand poster depth, not decoration -->
+  <g filter="url(#chalk)" stroke-linecap="round" stroke-linejoin="round" fill="none">
+    <path d="M-60 520 L120 280 L280 500 L460 240 L640 490 L820 250 L980 520" stroke="#1a1224" stroke-width="52" opacity="0.9"/>
+    <path d="M-40 360 L140 140 L300 350 L480 110 L660 340 L840 130 L980 360" stroke="#16101f" stroke-width="44" opacity="0.85"/>
+    <path d="M40 680 L200 460 L360 670 L540 430 L720 660 L900 440" stroke="#1c1528" stroke-width="40" opacity="0.8"/>
+    <path d="M-20 180 L100 40 L220 170 L360 20 L500 160" stroke="#14101c" stroke-width="36" opacity="0.75"/>
+    <path d="M520 700 L680 480 L820 690 L960 500" stroke="#181222" stroke-width="48" opacity="0.8"/>
+    <!-- softer secondary pass -->
+    <path d="M80 600 L240 390 L400 590 L580 360" stroke="#120e1a" stroke-width="28" opacity="0.7"/>
+  </g>
+</svg>

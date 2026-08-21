@@ -9,17 +9,21 @@ import { isDisciplineSlug } from "@/lib/disciplines";
 const createSchema = z.object({
   discipline: z.string(),
   name: z.string().min(2).max(120),
-  format: z.enum([
-    "SINGLE_ELIMINATION",
-    "DOUBLE_ELIMINATION",
-    "ROUND_ROBIN",
-    "SWISS",
-    "GROUPS_PLAYOFFS",
-  ]),
+  format: z
+    .enum([
+      "SINGLE_ELIMINATION",
+      "DOUBLE_ELIMINATION",
+      "ROUND_ROBIN",
+      "SWISS",
+      "GROUPS_PLAYOFFS",
+    ])
+    .default("GROUPS_PLAYOFFS"),
   participants: z.array(z.string().min(1).max(80)).min(2).max(128),
   seedingMode: z.enum(["manual", "order", "random", "snake"]).default("order"),
   groupCount: z.number().int().min(2).max(16).optional(),
   swissRounds: z.number().int().min(2).max(20).optional(),
+  streamUrl: z.string().max(500).optional(),
+  useDisciplinePreset: z.boolean().optional(),
 });
 
 export async function GET(req: NextRequest) {
@@ -107,6 +111,8 @@ export async function POST(req: NextRequest) {
       seedingMode: parsed.data.seedingMode,
       groupCount: parsed.data.groupCount,
       swissRounds: parsed.data.swissRounds,
+      streamUrl: parsed.data.streamUrl,
+      useDisciplinePreset: parsed.data.useDisciplinePreset ?? true,
     });
     return NextResponse.json({ tournament }, { status: 201 });
   } catch (e) {

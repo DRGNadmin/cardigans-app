@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
-import { Montserrat, Oswald } from "next/font/google";
+import { Caveat, Montserrat, Oswald } from "next/font/google";
+import { FygitalBg } from "@/components/FygitalBg";
 import "./globals.css";
 
 const montserrat = Montserrat({
@@ -11,6 +12,12 @@ const montserrat = Montserrat({
 const oswald = Oswald({
   subsets: ["latin", "cyrillic"],
   variable: "--font-oswald",
+  display: "swap",
+});
+
+const caveat = Caveat({
+  subsets: ["latin", "cyrillic"],
+  variable: "--font-caveat",
   display: "swap",
 });
 
@@ -28,14 +35,18 @@ export default function RootLayout({
   return (
     <html lang="ru">
       <body
-        className={`${montserrat.variable} ${oswald.variable} antialiased`}
+        className={`${montserrat.variable} ${oswald.variable} ${caveat.variable} antialiased`}
         style={
           {
-            ["--font-body" as string]: "var(--font-montserrat), system-ui, sans-serif",
+            ["--font-body" as string]:
+              "var(--font-montserrat), system-ui, sans-serif",
             ["--font-display" as string]: "var(--font-oswald), sans-serif",
+            ["--font-hand" as string]: "var(--font-caveat), cursive",
           } as React.CSSProperties
         }
+        suppressHydrationWarning
       >
+        <FygitalBg />
         {children}
       </body>
     </html>

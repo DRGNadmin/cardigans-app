@@ -1,52 +1,35 @@
 import { SiteHeader } from "@/components/SiteHeader";
 import { DisciplinePicker } from "@/components/DisciplinePicker";
-import { HeroStickerCluster } from "@/components/BrandStickers";
+import { DateCard } from "@/components/DateCard";
 import { DISCIPLINES } from "@/lib/disciplines";
 
 export default function HomePage() {
   return (
-    <main className="brand-zigzag relative min-h-screen overflow-hidden">
+    <main className="brand-zigzag relative overflow-x-hidden">
       <SiteHeader />
-      <section className="relative px-5 pb-10 pt-6 md:px-10 md:pt-10">
-        <HeroStickerCluster />
-        <div className="relative z-10">
-          <p className="animate-rise text-xs uppercase tracking-[0.28em] text-white/50">
-            Выбери дисциплину
-          </p>
-          <h1 className="animate-rise font-display mt-10 max-w-4xl text-5xl leading-[0.95] text-white sm:mt-12 md:mt-14 md:text-7xl">
-            Смотри{" "}
-            <span className="relative inline-block">
-              <span
-                className="sticker-float pointer-events-none absolute -top-10 left-1/2 z-0 -translate-x-1/2 sm:-top-12 md:-top-14"
-                style={{ animationDelay: "0.35s" }}
-                aria-hidden
-              >
-                <img
-                  src="/stickers/fang.png"
-                  alt=""
-                  width={95}
-                  height={102}
-                  className="h-10 w-auto object-contain sm:h-12 md:h-14"
-                  style={{
-                    transform: "rotate(-8deg)",
-                    filter: "drop-shadow(0 0 14px rgba(121,70,226,0.65))",
-                  }}
-                />
+
+      <section className="relative z-10 mx-auto max-w-[1400px] px-4 pb-4 pt-7 md:px-6 md:pt-9 lg:px-8">
+        <div className="flex flex-wrap items-start justify-between gap-4">
+          <div className="max-w-3xl">
+            <h1 className="animate-rise font-display text-[clamp(2.2rem,6.5vw,4.4rem)] leading-[0.95] text-white">
+              Все матчи.
+              <span className="mt-1 block text-white">Все сетки.</span>
+              <span className="mt-1 block bg-gradient-to-r from-[#c4b5fd] to-white bg-clip-text text-transparent">
+                Все в одном месте.
               </span>
-              <span className="relative z-10">сетку</span>
-            </span>
-            .
-            <span className="block" style={{ color: "#7946E2" }}>
-              Следи за матчами.
-            </span>
-          </h1>
-          <p className="animate-rise mt-5 max-w-xl text-base text-white/60 md:text-lg">
-            Интерактивный информатор чемпионата: актуальные сетки и расписание по
-            каждой дисциплине.
-          </p>
+            </h1>
+            <p className="animate-rise mt-4 max-w-xl text-sm uppercase tracking-[0.06em] text-white/55 md:text-[0.95rem]">
+              Смотри сетки и расписание всех дисциплин чемпионата России по
+              фиджитал спорту.
+            </p>
+          </div>
+          <DateCard />
         </div>
       </section>
-      <DisciplinePicker disciplines={DISCIPLINES} />
+
+      <div className="relative z-10 pb-8 pt-2 md:pb-10">
+        <DisciplinePicker disciplines={DISCIPLINES} />
+      </div>
     </main>
   );
 }

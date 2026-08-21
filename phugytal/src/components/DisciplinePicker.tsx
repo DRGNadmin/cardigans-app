@@ -5,48 +5,78 @@ import { motion } from "framer-motion";
 import type { Discipline } from "@/lib/disciplines";
 import { DisciplineSticker } from "@/components/BrandStickers";
 
-export function DisciplinePicker({ disciplines }: { disciplines: Discipline[] }) {
+export function DisciplinePicker({
+  disciplines,
+  selectedSlug,
+}: {
+  disciplines: Discipline[];
+  selectedSlug?: string;
+}) {
   return (
-    <div className="mx-auto grid w-full max-w-6xl grid-cols-1 gap-4 px-5 pb-16 sm:grid-cols-2 lg:grid-cols-3 md:px-10">
-      {disciplines.map((d, i) => (
-        <motion.div
-          key={d.slug}
-          initial={{ opacity: 0, y: 18 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.08 * i, duration: 0.4, ease: "easeOut" }}
-          whileHover={{ y: -4 }}
-        >
-          <Link
-            href={`/d/${d.slug}`}
-            className="focus-ring group relative block overflow-hidden rounded-3xl border border-white/10 bg-white/[0.03] px-6 py-8 transition duration-300 hover:border-white/20"
-            style={{ ["--disc" as string]: d.color }}
+    <div
+      id="disciplines"
+      className="relative z-10 grid w-full grid-cols-2 gap-2.5 px-3 sm:gap-3 sm:px-4 md:grid-cols-3 md:px-6 lg:grid-cols-5 lg:gap-3 lg:px-8"
+    >
+      {disciplines.map((d, i) => {
+        const selected = selectedSlug === d.slug;
+        return (
+          <motion.div
+            key={d.slug}
+            className={`relative min-w-0 ${i === disciplines.length - 1 ? "col-span-2 md:col-span-1" : ""}`}
+            initial={{ opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.04 * i, duration: 0.28, ease: "easeOut" }}
           >
-            <div
-              className="pointer-events-none absolute inset-0 opacity-0 transition duration-300 group-hover:opacity-100"
+            <Link
+              href={`/d/${d.slug}`}
+              className="focus-ring group relative flex min-h-[10.5rem] flex-col overflow-hidden rounded-[10px] border bg-black/80 px-3 py-3 backdrop-blur-sm transition-[border-color,background-color,transform] duration-200 ease-out sm:min-h-[11.5rem] sm:px-4 sm:py-4 lg:min-h-[12.5rem] hover:-translate-y-0.5 hover:bg-black/95"
               style={{
-                background: `radial-gradient(circle at 30% 25%, ${d.color}40, transparent 58%)`,
+                ["--disc" as string]: d.color,
+                borderColor: selected ? d.color : "rgba(255,255,255,0.12)",
+                boxShadow: selected ? `0 0 0 1px ${d.color}` : undefined,
               }}
-            />
-
-            <span className="absolute -right-1 -top-1 transition duration-300 group-hover:scale-110 group-hover:rotate-6 md:right-3 md:top-3">
-              <DisciplineSticker slug={d.slug} />
-            </span>
-
-            <p className="relative pr-16 text-xs uppercase tracking-[0.22em] text-white/50">
-              {d.blurb}
-            </p>
-            <h2
-              className="relative mt-3 font-display text-4xl md:text-5xl"
-              style={{ color: d.color }}
+              onMouseEnter={(e) => {
+                if (selected) return;
+                e.currentTarget.style.borderColor = d.color;
+              }}
+              onMouseLeave={(e) => {
+                if (selected) return;
+                e.currentTarget.style.borderColor = "rgba(255,255,255,0.12)";
+              }}
+              aria-current={selected ? "page" : undefined}
             >
-              {d.name}
-            </h2>
-            <p className="relative mt-4 text-sm text-white/55 transition group-hover:text-white/80">
-              Сетка и расписание →
-            </p>
-          </Link>
-        </motion.div>
-      ))}
+              {selected ? (
+                <span
+                  className="absolute right-2 top-2 z-10 rounded px-1.5 py-0.5 text-[9px] font-bold uppercase tracking-wider text-black"
+                  style={{ background: d.color }}
+                >
+                  Выбрано
+                </span>
+              ) : null}
+
+              <span className="pointer-events-none absolute -right-1 top-7 sm:right-0 sm:top-6">
+                <DisciplineSticker slug={d.slug} size={100} />
+              </span>
+
+              <p className="relative z-[1] max-w-[58%] text-[0.6rem] uppercase leading-snug tracking-[0.14em] text-white/40 sm:text-[0.65rem]">
+                {d.blurb}
+              </p>
+              <h2
+                className="relative z-[1] mt-auto pt-8 font-display text-[clamp(1.45rem,1.9vw,2.15rem)] leading-none"
+                style={{ color: d.color }}
+              >
+                {d.name}
+              </h2>
+              <p
+                className="relative z-[1] mt-2 text-[11px] font-semibold uppercase tracking-[0.14em] text-white/45 transition-colors duration-200 group-hover:text-white/80"
+                style={selected ? { color: d.color } : undefined}
+              >
+                Сетка и расписание
+              </p>
+            </Link>
+          </motion.div>
+        );
+      })}
     </div>
   );
 }

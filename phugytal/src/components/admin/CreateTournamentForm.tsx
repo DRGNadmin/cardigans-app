@@ -2,7 +2,7 @@
 
 import { FormEvent, useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
-import { FORMAT_LABELS, type Format, type SeedingMode } from "@/lib/brackets";
+import { FORMAT_LABELS, getPreset, type Format, type SeedingMode } from "@/lib/brackets";
 
 const FORMATS = Object.keys(FORMAT_LABELS) as Format[];
 
@@ -14,11 +14,19 @@ export function CreateTournamentForm({
   accent: string;
 }) {
   const router = useRouter();
+  const preset = getPreset(discipline);
   const [name, setName] = useState(`${discipline.toUpperCase()} Bracket`);
-  const [format, setFormat] = useState<Format>("SINGLE_ELIMINATION");
-  const [seedingMode, setSeedingMode] = useState<SeedingMode>("order");
+  const [usePreset, setUsePreset] = useState(true);
+  const [format, setFormat] = useState<Format>("GROUPS_PLAYOFFS");
+  const [seedingMode, setSeedingMode] = useState<SeedingMode>("snake");
+  const [streamUrl, setStreamUrl] = useState("");
+  const defaultCount = preset
+    ? preset.groupCount * Math.max(2, preset.groupSizeHint)
+    : 8;
   const [participantsText, setParticipantsText] = useState(
-    "Team Alpha\nTeam Bravo\nTeam Charlie\nTeam Delta\nTeam Echo\nTeam Foxtrot\nTeam Golf\nTeam Hotel",
+    Array.from({ length: defaultCount }, (_, i) => `Участник ${i + 1}`).join(
+      "\n",
+    ),
   );
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
@@ -43,9 +51,11 @@ export function CreateTournamentForm({
         body: JSON.stringify({
           discipline,
           name,
-          format,
+          format: usePreset ? "GROUPS_PLAYOFFS" : format,
           seedingMode,
           participants,
+          streamUrl: streamUrl || undefined,
+          useDisciplinePreset: usePreset,
         }),
       });
       const data = await res.json();
@@ -64,6 +74,21 @@ export function CreateTournamentForm({
 
   return (
     <form onSubmit={onSubmit} className="mt-4 space-y-4 border border-white/12 p-5">
+      {preset ? (
+        <label className="flex items-start gap-3 text-sm text-white/80">
+          <input
+            type="checkbox"
+            className="mt-1"
+            checked={usePreset}
+            onChange={(e) => setUsePreset(e.target.checked)}
+          />
+          <span>
+            Пресет дисциплины:{" "}
+            <span style={{ color: accent }}>{preset.label}</span>
+          </span>
+        </label>
+      ) : null}
+
       <label className="block text-sm text-white/70">
         Название
         <input
@@ -75,19 +100,31 @@ export function CreateTournamentForm({
       </label>
 
       <label className="block text-sm text-white/70">
-        Формат
-        <select
+        Ссылка на стрим (общая)
+        <input
           className="focus-ring mt-2 w-full border border-white/15 bg-black px-3 py-2.5"
-          value={format}
-          onChange={(e) => setFormat(e.target.value as Format)}
-        >
-          {FORMATS.map((f) => (
-            <option key={f} value={f}>
-              {FORMAT_LABELS[f]}
-            </option>
-          ))}
-        </select>
+          value={streamUrl}
+          onChange={(e) => setStreamUrl(e.target.value)}
+          placeholder="https://..."
+        />
       </label>
+
+      {!usePreset ? (
+        <label className="block text-sm text-white/70">
+          Формат
+          <select
+            className="focus-ring mt-2 w-full border border-white/15 bg-black px-3 py-2.5"
+            value={format}
+            onChange={(e) => setFormat(e.target.value as Format)}
+          >
+            {FORMATS.map((f) => (
+              <option key={f} value={f}>
+                {FORMAT_LABELS[f]}
+              </option>
+            ))}
+          </select>
+        </label>
+      ) : null}
 
       <label className="block text-sm text-white/70">
         Посев
@@ -118,10 +155,10 @@ export function CreateTournamentForm({
       <button
         type="submit"
         disabled={loading || participants.length < 2}
-        className="focus-ring px-5 py-3 font-semibold text-black disabled:opacity-50"
+        className="focus-ring rounded-2xl px-5 py-3 text-sm font-semibold uppercase tracking-wider text-black disabled:opacity-40"
         style={{ background: accent }}
       >
-        {loading ? "Создаём…" : "Создать сетку"}
+        {loading ? "Создаём…" : "Создать турнир"}
       </button>
     </form>
   );

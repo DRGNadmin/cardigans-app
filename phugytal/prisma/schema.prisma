@@ -33,6 +33,7 @@ enum RoundKind {
   GROUP
   SWISS
   PLAYOFF
+  THIRD_PLACE
 }
 
 model User {
@@ -72,6 +73,7 @@ model Tournament {
   name         String
   format       TournamentFormat
   status       TournamentStatus @default(DRAFT)
+  streamUrl    String?
   settingsJson String           @default("{}")
   createdAt    DateTime         @default(now())
   updatedAt    DateTime         @updatedAt
@@ -84,14 +86,17 @@ model Tournament {
 }
 
 model Participant {
-  id           String      @id @default(cuid())
+  id           String     @id @default(cuid())
   tournamentId String
-  tournament   Tournament  @relation(fields: [tournamentId], references: [id], onDelete: Cascade)
+  tournament   Tournament @relation(fields: [tournamentId], references: [id], onDelete: Cascade)
   name         String
   seed         Int
   groupId      String?
-  group        Group?      @relation(fields: [groupId], references: [id])
-  createdAt    DateTime    @default(now())
+  group        Group?     @relation(fields: [groupId], references: [id])
+  points       Int        @default(0)
+  statusText   String     @default("")
+  logoUrl      String?
+  createdAt    DateTime   @default(now())
 
   @@unique([tournamentId, seed])
   @@index([tournamentId])
@@ -105,6 +110,7 @@ model Group {
   order        Int
   participants Participant[]
   matches      Match[]
+  rounds       Round[]
 
   @@index([tournamentId])
 }
@@ -116,34 +122,40 @@ model Round {
   name         String
   kind         RoundKind
   order        Int
+  groupId      String?
+  group        Group?     @relation(fields: [groupId], references: [id])
   matches      Match[]
 
   @@index([tournamentId])
 }
 
 model Match {
-  id              String        @id @default(cuid())
-  tournamentId    String
-  tournament      Tournament    @relation(fields: [tournamentId], references: [id], onDelete: Cascade)
-  roundId         String
-  round           Round         @relation(fields: [roundId], references: [id], onDelete: Cascade)
-  groupId         String?
-  group           Group?        @relation(fields: [groupId], references: [id])
-  orderInRound    Int
-  participant1Id  String?
-  participant2Id  String?
-  score1          Int?
-  score2          Int?
-  winnerId        String?
-  scheduledAt     DateTime?
-  venue           String?
-  nextMatchId     String?
-  nextSlot        Int?
+  id               String     @id @default(cuid())
+  tournamentId     String
+  tournament       Tournament @relation(fields: [tournamentId], references: [id], onDelete: Cascade)
+  roundId          String
+  round            Round      @relation(fields: [roundId], references: [id], onDelete: Cascade)
+  groupId          String?
+  group            Group?     @relation(fields: [groupId], references: [id])
+  orderInRound     Int
+  participant1Id   String?
+  participant2Id   String?
+  score1           Int?
+  score2           Int?
+  winnerId         String?
+  scheduledAt      DateTime?
+  venue            String?
+  isLive           Boolean    @default(false)
+  streamUrl        String?
+  slotLabel1       String?
+  slotLabel2       String?
+  nextMatchId      String?
+  nextSlot         Int?
   loserNextMatchId String?
-  loserNextSlot   Int?
-  isBye           Boolean       @default(false)
-  createdAt       DateTime      @default(now())
-  updatedAt       DateTime      @updatedAt
+  loserNextSlot    Int?
+  isBye            Boolean    @default(false)
+  createdAt        DateTime   @default(now())
+  updatedAt        DateTime   @updatedAt
 
   @@index([tournamentId])
   @@index([roundId])

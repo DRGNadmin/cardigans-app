@@ -1,89 +1,95 @@
-import Link from "next/link";
 import { notFound } from "next/navigation";
 import { SiteHeader } from "@/components/SiteHeader";
-import { BracketView } from "@/components/BracketView";
-import { BrandSticker, DisciplineSticker } from "@/components/BrandStickers";
-import { getDiscipline, isDisciplineSlug } from "@/lib/disciplines";
+import { DisciplinePicker } from "@/components/DisciplinePicker";
+import { DateCard } from "@/components/DateCard";
+import { TournamentArena } from "@/components/TournamentArena";
+import { ArenaSidebar } from "@/components/ArenaSidebar";
+import { DISCIPLINES, getDiscipline, isDisciplineSlug } from "@/lib/disciplines";
 import { getActiveTournament, serializeTournament } from "@/lib/tournamentQuery";
+import { canAccessDiscipline, getSessionUser } from "@/lib/auth/session";
 
 export const dynamic = "force-dynamic";
 export const revalidate = 0;
 
 export default async function DisciplinePage({
   params,
+  searchParams,
 }: {
   params: Promise<{ slug: string }>;
+  searchParams: Promise<{ team?: string }>;
 }) {
   const { slug } = await params;
+  const { team: highlightTeamId } = await searchParams;
   if (!isDisciplineSlug(slug)) notFound();
   const discipline = getDiscipline(slug)!;
   const tournament = await getActiveTournament(slug);
   const data = tournament ? serializeTournament(tournament) : null;
+  const user = await getSessionUser();
+  const canEdit = Boolean(user && canAccessDiscipline(user, slug));
 
   return (
     <main
-      className="brand-zigzag relative min-h-screen overflow-hidden"
+      className="brand-zigzag relative min-h-screen overflow-x-hidden"
       style={{ ["--disc" as string]: discipline.color }}
     >
       <SiteHeader accent={discipline.color} />
-      <BrandSticker
-        kind="star"
-        color={discipline.color}
-        size={48}
-        rotate={16}
-        className="absolute right-[10%] top-24 opacity-70"
-      />
-      <BrandSticker
-        kind="lightning"
-        color="#7946E2"
-        size={56}
-        rotate={-14}
-        className="absolute bottom-24 left-[6%] hidden opacity-60 md:block"
-      />
-      <section className="relative z-10 px-4 pb-5 pt-3 sm:px-5 md:px-10 md:pt-4">
-        <p className="text-[11px] uppercase tracking-[0.22em] text-white/50 sm:text-xs">
-          {discipline.blurb}
-        </p>
-        <div className="mt-3 flex flex-wrap items-end justify-between gap-3 sm:gap-4">
-          <div className="flex min-w-0 items-center gap-3 sm:gap-4">
-            <span className="hidden sm:inline-flex">
-              <DisciplineSticker slug={slug} />
-            </span>
-            <h1
-              className="font-display text-4xl leading-none sm:text-5xl md:text-7xl"
-              style={{ color: discipline.color }}
-            >
-              {discipline.name}
+
+      <section className="relative z-10 mx-auto max-w-[1400px] px-4 pb-3 pt-6 md:px-6 md:pt-8 lg:px-8">
+        <div className="flex flex-wrap items-start justify-between gap-4">
+          <div className="max-w-3xl">
+            <h1 className="animate-rise font-display text-[clamp(2rem,5.5vw,3.8rem)] leading-[0.95] text-white">
+              Все матчи.
+              <span className="mt-1 block text-white">Все сетки.</span>
+              <span className="mt-1 block bg-gradient-to-r from-[#c4b5fd] to-white bg-clip-text text-transparent">
+                Все в одном месте.
+              </span>
             </h1>
+            <p className="animate-rise mt-3 max-w-xl text-sm uppercase tracking-[0.06em] text-white/55">
+              Смотри сетки и расписание всех дисциплин чемпионата России по
+              фиджитал спорту.
+            </p>
           </div>
-          <Link
-            href={`/d/${slug}/schedule`}
-            className="focus-ring inline-flex items-center rounded-2xl border px-4 py-2.5 text-xs font-semibold uppercase tracking-wider transition hover:bg-white hover:text-black sm:px-5 sm:py-3 sm:text-sm"
-            style={{ borderColor: discipline.color, color: discipline.color }}
-          >
-            Расписание
-          </Link>
+          <DateCard accent={discipline.color} />
         </div>
-        {data ? (
-          <p className="mt-3 text-sm text-white/55">
-            {data.name} · {data.format.replaceAll("_", " ")}
-          </p>
-        ) : (
-          <p className="mt-3 text-sm text-white/55">Турнир ещё не опубликован</p>
-        )}
       </section>
 
-      <section className="relative z-10 px-3 pb-12 sm:px-5 sm:pb-16 md:px-10">
+      <div className="relative z-10 pb-4 pt-1">
+        <DisciplinePicker
+          disciplines={DISCIPLINES}
+          selectedSlug={discipline.slug}
+        />
+      </div>
+
+      <section className="relative z-10 mx-auto max-w-[1400px] px-3 pb-12 sm:px-5 md:px-6 lg:px-8">
         {data ? (
-          <BracketView
-            rounds={data.rounds}
-            matches={data.matches}
-            participants={data.participants}
-            accent={discipline.color}
-          />
+          <div className="flex flex-col gap-4 lg:flex-row lg:items-start">
+            <div className="min-w-0 flex-1">
+              <TournamentArena
+                initial={data}
+                accent={discipline.color}
+                canEdit={canEdit}
+                mode="bracket"
+                title={discipline.shortName}
+                scheduleHref={`/d/${discipline.slug}/schedule`}
+                subtitle={discipline.blurb}
+                highlightTeamId={highlightTeamId ?? null}
+              />
+            </div>
+            <ArenaSidebar
+              data={data}
+              accent={discipline.color}
+              title={`Расписание ${discipline.shortName}`}
+              highlightTeamId={highlightTeamId ?? null}
+            />
+          </div>
         ) : (
-          <div className="rounded-3xl border border-dashed border-white/15 px-6 py-16 text-center text-white/55">
-            Сетка ещё не создана
+          <div className="ui-panel px-6 py-16 text-center">
+            <p className="font-display text-2xl text-white/80">
+              Сетка ещё не создана
+            </p>
+            <p className="mt-2 text-sm text-white/45">
+              Когда турнир опубликуют, здесь появится сетка матчей.
+            </p>
           </div>
         )}
       </section>

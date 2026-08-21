@@ -1,3 +1,4 @@
+import { annotateAdvancementLabels } from "./playoffSeeding";
 import { nextPowerOfTwo, roundNameForWb, seedPositions } from "./seeding";
 import type { GeneratedBracket, GeneratedMatch, GeneratedRound } from "./types";
 
@@ -71,5 +72,6 @@ export function generateSingleElimination(participantCount: number): GeneratedBr
     matchIdsByRound.push(ids);
   }
 
+  annotateAdvancementLabels(matches, rounds);
   return { rounds, matches };
 }

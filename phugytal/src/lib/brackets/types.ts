@@ -11,7 +11,11 @@ export type RoundKind =
   | "FINAL"
   | "GROUP"
   | "SWISS"
-  | "PLAYOFF";
+  | "PLAYOFF"
+  | "THIRD_PLACE";
+
+export type GroupStageFormat = "RR" | "DE" | "TABLE";
+export type PlayoffFormat = "SE" | "DE" | "NONE";
 
 export type SeedParticipant = {
   id: string;
@@ -23,6 +27,7 @@ export type GeneratedRound = {
   name: string;
   kind: RoundKind;
   order: number;
+  groupName?: string;
 };
 
 export type GeneratedMatch = {
@@ -37,6 +42,9 @@ export type GeneratedMatch = {
   loserNextTempId?: string;
   loserNextSlot?: 1 | 2;
   groupName?: string;
+  /** Display feed when participant not yet filled, e.g. A1 / B2 */
+  slotLabel1?: string | null;
+  slotLabel2?: string | null;
 };
 
 export type GeneratedBracket = {
@@ -46,3 +54,13 @@ export type GeneratedBracket = {
 };
 
 export type SeedingMode = "manual" | "order" | "random" | "snake";
+
+export type BracketGenerateOptions = {
+  groupCount?: number;
+  swissRounds?: number;
+  advancePerGroup?: number;
+  groupFormat?: GroupStageFormat;
+  playoffFormat?: PlayoffFormat;
+  thirdPlace?: boolean;
+  standingsTable?: boolean;
+};

@@ -1,9 +1,10 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { SiteHeader } from "@/components/SiteHeader";
-import { ScheduleList } from "@/components/ScheduleList";
+import { TournamentArena } from "@/components/TournamentArena";
 import { getDiscipline, isDisciplineSlug } from "@/lib/disciplines";
-import { getActiveTournament } from "@/lib/tournamentQuery";
+import { getActiveTournament, serializeTournament } from "@/lib/tournamentQuery";
+import { canAccessDiscipline, getSessionUser } from "@/lib/auth/session";
 
 export const dynamic = "force-dynamic";
 export const revalidate = 0;
@@ -17,37 +18,17 @@ export default async function SchedulePage({
   if (!isDisciplineSlug(slug)) notFound();
   const discipline = getDiscipline(slug)!;
   const tournament = await getActiveTournament(slug);
-
-  const partById = new Map(
-    (tournament?.participants ?? []).map((p) => [p.id, p.name]),
-  );
-  const roundById = new Map(
-    (tournament?.rounds ?? []).map((r) => [r.id, r.name]),
-  );
-
-  const rows = (tournament?.matches ?? [])
-    .slice()
-    .sort((a, b) => {
-      const at = a.scheduledAt?.getTime() ?? Number.MAX_SAFE_INTEGER;
-      const bt = b.scheduledAt?.getTime() ?? Number.MAX_SAFE_INTEGER;
-      if (at !== bt) return at - bt;
-      return a.orderInRound - b.orderInRound;
-    })
-    .map((m) => ({
-      id: m.id,
-      roundName: roundById.get(m.roundId) ?? "—",
-      p1: m.participant1Id ? (partById.get(m.participant1Id) ?? "TBD") : "TBD",
-      p2: m.participant2Id ? (partById.get(m.participant2Id) ?? "TBD") : "TBD",
-      score1: m.score1,
-      score2: m.score2,
-      scheduledAt: m.scheduledAt,
-      venue: m.venue,
-    }));
+  const data = tournament ? serializeTournament(tournament) : null;
+  const user = await getSessionUser();
+  const canEdit = Boolean(user && canAccessDiscipline(user, slug));
 
   return (
-    <main className="brand-zigzag min-h-screen">
+    <main
+      className="brand-zigzag min-h-screen"
+      style={{ ["--disc" as string]: discipline.color }}
+    >
       <SiteHeader accent={discipline.color} />
-      <section className="px-5 pb-6 pt-4 md:px-10">
+      <section className="mx-auto max-w-[1400px] px-4 pb-6 pt-5 md:px-6 lg:px-8">
         <Link
           href={`/d/${slug}`}
           className="focus-ring text-sm text-white/55 hover:text-white"
@@ -61,11 +42,25 @@ export default async function SchedulePage({
           Расписание
         </h1>
         <p className="mt-2 text-sm text-white/55">
-          Счёт синхронизирован с турнирной сеткой
+          Счёт и Live синхронизируются без перезагрузки
         </p>
       </section>
-      <section className="px-5 pb-16 md:px-10">
-        <ScheduleList rows={rows} accent={discipline.color} />
+      <section className="mx-auto max-w-[1400px] px-4 pb-16 md:px-6 lg:px-8">
+        {data ? (
+          <TournamentArena
+            initial={data}
+            accent={discipline.color}
+            canEdit={canEdit}
+            mode="schedule"
+          />
+        ) : (
+          <div className="ui-panel px-6 py-16 text-center">
+            <p className="font-display text-2xl text-white/80">Расписание пусто</p>
+            <p className="mt-2 text-sm text-white/45">
+              Когда матчи назначат, они появятся здесь.
+            </p>
+          </div>
+        )}
       </section>
     </main>
   );

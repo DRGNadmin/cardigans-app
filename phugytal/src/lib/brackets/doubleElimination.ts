@@ -1,3 +1,4 @@
+import { annotateAdvancementLabels } from "./playoffSeeding";
 import { generateSingleElimination } from "./singleElimination";
 import { nextPowerOfTwo } from "./seeding";
 import type { GeneratedBracket, GeneratedMatch, GeneratedRound } from "./types";
@@ -97,5 +98,15 @@ export function generateDoubleElimination(participantCount: number): GeneratedBr
     lm.nextSlot = 2;
   }
 
+  // Nested SE already annotated WB; refresh after LB/GF wiring + renamed rounds.
+  for (const m of matches) {
+    if (m.slotLabel1?.startsWith("Поб.") || m.slotLabel1?.startsWith("Проигр.")) {
+      m.slotLabel1 = undefined;
+    }
+    if (m.slotLabel2?.startsWith("Поб.") || m.slotLabel2?.startsWith("Проигр.")) {
+      m.slotLabel2 = undefined;
+    }
+  }
+  annotateAdvancementLabels(matches, rounds);
   return { rounds, matches };
 }

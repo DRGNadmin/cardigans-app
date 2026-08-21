@@ -3,10 +3,12 @@ import { generateGroupsPlayoffs } from "./groupsPlayoffs";
 import { generateRoundRobin } from "./roundRobin";
 import { generateSingleElimination } from "./singleElimination";
 import { generateSwiss } from "./swiss";
-import type { Format, GeneratedBracket } from "./types";
+import type { BracketGenerateOptions, Format, GeneratedBracket } from "./types";
 
 export * from "./types";
 export * from "./seeding";
+export * from "./presets";
+export * from "./playoffSeeding";
 export { generateSingleElimination } from "./singleElimination";
 export { generateDoubleElimination } from "./doubleElimination";
 export { generateRoundRobin } from "./roundRobin";
@@ -16,7 +18,7 @@ export { generateGroupsPlayoffs } from "./groupsPlayoffs";
 export function generateBracket(
   format: Format,
   participantCount: number,
-  options?: { groupCount?: number; swissRounds?: number },
+  options?: BracketGenerateOptions,
 ): GeneratedBracket {
   switch (format) {
     case "SINGLE_ELIMINATION":
@@ -28,10 +30,7 @@ export function generateBracket(
     case "SWISS":
       return generateSwiss(participantCount, options?.swissRounds);
     case "GROUPS_PLAYOFFS":
-      return generateGroupsPlayoffs(
-        participantCount,
-        options?.groupCount ?? 4,
-      );
+      return generateGroupsPlayoffs(participantCount, options);
     default:
       throw new Error(`Неизвестный формат: ${format}`);
   }

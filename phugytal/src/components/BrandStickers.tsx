@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 type StickerKind =
   | "smiley"
   | "crown"
@@ -49,12 +51,9 @@ export function BrandSticker({
         </filter>
       </defs>
       <g filter={`url(#gel-${id})`}>
-        {/* outer gel rim */}
         <circle cx="40" cy="40" r="34" fill={color} opacity="0.95" />
         <circle cx="40" cy="40" r="34" fill="none" stroke={color} strokeWidth="2" opacity="0.55" />
-        {/* black sticker face */}
         <circle cx="40" cy="40" r="26" fill="#050505" />
-        {/* soft highlight on rim */}
         <path
           d="M18 28c6-10 22-14 34-8"
           fill="none"
@@ -143,100 +142,300 @@ function iconPath(kind: StickerKind) {
   }
 }
 
-/** Floating brandbook stickers on the home hero: crown, cool emoji under it, skull. */
-export function HeroStickerCluster() {
+type WallItem = {
+  src: string;
+  alt: string;
+  className: string;
+  delay: string;
+  rotate: string;
+  glow: string;
+  w: number;
+  h: number;
+  priority?: boolean;
+};
+
+const WALL: WallItem[] = [
+  {
+    src: "/stickers/crown.png",
+    alt: "",
+    className: "left-[2%] top-0 h-[42%] max-h-44",
+    delay: "0s",
+    rotate: "rotate(14deg)",
+    glow: "drop-shadow(0 0 22px rgba(0,255,0,0.55))",
+    w: 222,
+    h: 204,
+    priority: true,
+  },
+  {
+    src: "/stickers/cool.png",
+    alt: "",
+    className: "right-[4%] top-[4%] h-[48%] max-h-52",
+    delay: "0.3s",
+    rotate: "rotate(-8deg)",
+    glow: "drop-shadow(0 0 22px rgba(0,255,0,0.5))",
+    w: 155,
+    h: 114,
+    priority: true,
+  },
+  {
+    src: "/stickers/skull.png",
+    alt: "",
+    className: "bottom-0 left-[18%] h-[46%] max-h-48",
+    delay: "0.65s",
+    rotate: "rotate(-12deg)",
+    glow: "drop-shadow(0 0 22px rgba(0,255,0,0.5))",
+    w: 136,
+    h: 133,
+  },
+  {
+    src: "/stickers/fang.png",
+    alt: "",
+    className: "bottom-[10%] right-[16%] h-[32%] max-h-36",
+    delay: "1s",
+    rotate: "rotate(10deg)",
+    glow: "drop-shadow(0 0 18px rgba(121,70,226,0.75))",
+    w: 190,
+    h: 204,
+  },
+  {
+    src: "/stickers/cool.png",
+    alt: "",
+    className: "left-[38%] top-[28%] h-[28%] max-h-28 opacity-80",
+    delay: "0.5s",
+    rotate: "rotate(18deg)",
+    glow: "drop-shadow(0 0 16px rgba(0,255,0,0.35))",
+    w: 155,
+    h: 114,
+  },
+];
+
+function NeonSticker({
+  src,
+  alt = "",
+  width,
+  height,
+  className = "",
+  delay = "0s",
+  rotate = "none",
+  glow = "drop-shadow(0 0 18px rgba(0,255,0,0.45))",
+  priority = false,
+  opacity = 1,
+}: {
+  src: string;
+  alt?: string;
+  width: number;
+  height: number;
+  className?: string;
+  delay?: string;
+  rotate?: string;
+  glow?: string;
+  priority?: boolean;
+  /** Apply on the <img>, not a parent — parent opacity breaks mix-blend-mode. */
+  opacity?: number;
+}) {
+  return (
+    <span
+      className={`sticker-float absolute ${className}`}
+      style={{ animationDelay: delay }}
+    >
+      <Image
+        src={src}
+        alt={alt}
+        width={width}
+        height={height}
+        priority={priority}
+        className="h-full w-auto object-contain"
+        style={{
+          transform: rotate,
+          filter: glow,
+          opacity,
+          // black leftovers dissolve into the dark page
+          mixBlendMode: "screen",
+        }}
+      />
+    </span>
+  );
+}
+
+/** Dense right-side collage — free stickers, no panel / rectangle. */
+export function HeroStickerWall({
+  className = "",
+}: {
+  className?: string;
+} = {}) {
   return (
     <div
-      className="pointer-events-none absolute inset-0 overflow-hidden"
+      className={`pointer-events-none relative mx-auto aspect-[5/4] w-full max-w-none md:aspect-auto md:h-[min(42vh,22rem)] md:min-h-[16rem] ${className}`}
       aria-hidden
     >
-      {/* 1 — crown */}
-      <span
-        className="sticker-float absolute right-[6%] top-2 sm:right-[10%] sm:top-4 md:right-[14%] md:top-6"
-        style={{ animationDelay: "0s" }}
-      >
-        <img
-          src="/stickers/crown.png"
-          alt=""
-          width={111}
-          height={102}
-          className="h-16 w-auto object-contain sm:h-20 md:h-24"
-          style={{
-            transform: "rotate(12deg)",
-            filter: "drop-shadow(0 0 14px rgba(0,255,0,0.55))",
-          }}
+      {WALL.map((item) => (
+        <NeonSticker
+          key={`${item.src}-${item.className}`}
+          src={item.src}
+          alt={item.alt}
+          width={item.w}
+          height={item.h}
+          className={item.className}
+          delay={item.delay}
+          rotate={item.rotate}
+          glow={item.glow}
+          priority={item.priority}
         />
-      </span>
-
-      {/* 2 — cool emoji under crown */}
-      <span
-        className="sticker-float absolute right-[10%] top-[5.5rem] sm:right-[14%] sm:top-28 md:right-[18%] md:top-32"
-        style={{ animationDelay: "0.55s" }}
-      >
-        <img
-          src="/stickers/cool.png"
-          alt=""
-          width={121}
-          height={105}
-          className="h-14 w-auto object-contain sm:h-[4.5rem] md:h-20"
-          style={{
-            transform: "rotate(8deg)",
-            filter: "drop-shadow(0 0 14px rgba(0,255,0,0.55))",
-          }}
-        />
-      </span>
-
-      {/* 3 — skull */}
-      <span
-        className="sticker-float absolute bottom-2 left-[8%] sm:bottom-4 sm:left-[14%] md:left-[18%]"
-        style={{ animationDelay: "1.1s" }}
-      >
-        <img
-          src="/stickers/skull.png"
-          alt=""
-          width={129}
-          height={125}
-          className="h-16 w-auto object-contain sm:h-[4.75rem] md:h-24"
-          style={{
-            transform: "rotate(-10deg)",
-            filter: "drop-shadow(0 0 14px rgba(0,255,0,0.55))",
-          }}
-        />
-      </span>
+      ))}
     </div>
   );
 }
 
-const DISCIPLINE_STICKERS: Record<
-  string,
-  { kind: StickerKind; color: string; rotate: number }
-> = {
-  fifa: { kind: "ball", color: "#00FF00", rotate: -8 },
-  nhl: { kind: "puck", color: "#00E6FF", rotate: 10 },
-  nba: { kind: "hoop", color: "#FB5608", rotate: -6 },
-  cs2: { kind: "crosshair", color: "#FFD31C", rotate: 12 },
-  rhythm: { kind: "note", color: "#FF006E", rotate: -10 },
+/** Mobile-only: few spaced stickers behind content — no stacking / no box. */
+export function MobileBgStickers() {
+  return (
+    <div
+      className="pointer-events-none absolute inset-x-0 top-0 z-0 h-[32rem] overflow-hidden md:hidden"
+      aria-hidden
+    >
+      <NeonSticker
+        src="/stickers/crown.png"
+        width={136}
+        height={133}
+        className="right-[-6%] top-[6%] h-28"
+        delay="0s"
+        rotate="rotate(12deg)"
+        glow="drop-shadow(0 0 14px rgba(0,255,0,0.35))"
+        opacity={0.34}
+        priority
+      />
+      <NeonSticker
+        src="/stickers/cool.png"
+        width={155}
+        height={114}
+        className="left-[-8%] top-[38%] h-24"
+        delay="0.4s"
+        rotate="rotate(-10deg)"
+        glow="drop-shadow(0 0 14px rgba(0,255,0,0.3))"
+        opacity={0.28}
+      />
+      <NeonSticker
+        src="/stickers/fang.png"
+        width={95}
+        height={102}
+        className="right-[8%] top-[58%] h-16"
+        delay="0.8s"
+        rotate="rotate(8deg)"
+        glow="drop-shadow(0 0 12px rgba(121,70,226,0.4))"
+        opacity={0.3}
+      />
+    </div>
+  );
+}
+
+const FOOTER: WallItem[] = [
+  {
+    src: "/stickers/doodle-crown.png",
+    alt: "",
+    className: "left-[4%] top-[8%] h-16 sm:h-20 md:h-24",
+    delay: "0s",
+    rotate: "rotate(-12deg)",
+    glow: "drop-shadow(0 0 16px rgba(0,255,0,0.5))",
+    w: 160,
+    h: 140,
+  },
+  {
+    src: "/stickers/doodle-ball.png",
+    alt: "",
+    className: "left-[22%] bottom-[6%] h-14 sm:h-[4.5rem] md:h-20",
+    delay: "0.25s",
+    rotate: "rotate(8deg)",
+    glow: "drop-shadow(0 0 16px rgba(0,255,0,0.45))",
+    w: 140,
+    h: 140,
+  },
+  {
+    src: "/stickers/doodle-basket.png",
+    alt: "",
+    className: "left-[42%] top-[4%] h-16 sm:h-20 md:h-24",
+    delay: "0.45s",
+    rotate: "rotate(-6deg)",
+    glow: "drop-shadow(0 0 16px rgba(0,255,0,0.45))",
+    w: 150,
+    h: 150,
+  },
+  {
+    src: "/stickers/doodle-heart.png",
+    alt: "",
+    className: "right-[28%] bottom-[10%] h-12 sm:h-16 md:h-[4.5rem]",
+    delay: "0.7s",
+    rotate: "rotate(14deg)",
+    glow: "drop-shadow(0 0 16px rgba(0,255,0,0.45))",
+    w: 130,
+    h: 120,
+  },
+  {
+    src: "/stickers/doodle-note.png",
+    alt: "",
+    className: "right-[6%] top-[10%] h-16 sm:h-20 md:h-24",
+    delay: "0.95s",
+    rotate: "rotate(-10deg)",
+    glow: "drop-shadow(0 0 16px rgba(121,70,226,0.65))",
+    w: 150,
+    h: 140,
+  },
+];
+
+/** Scattered doodle stickers under the discipline cards. */
+export function FooterStickerBand() {
+  return (
+    <div
+      className="pointer-events-none relative mx-auto h-28 w-full max-w-6xl overflow-visible px-4 sm:h-32 md:h-40 md:px-8"
+      aria-hidden
+    >
+      {FOOTER.map((item) => (
+        <NeonSticker
+          key={`${item.src}-${item.className}`}
+          src={item.src}
+          alt={item.alt}
+          width={item.w}
+          height={item.h}
+          className={item.className}
+          delay={item.delay}
+          rotate={item.rotate}
+          glow={item.glow}
+        />
+      ))}
+    </div>
+  );
+}
+
+/** @deprecated use HeroStickerWall */
+export function HeroStickerCluster() {
+  return <HeroStickerWall />;
+}
+
+const DISCIPLINE_STICKER_SRC: Record<string, string> = {
+  fifa: "/stickers/disc-fifa.png",
+  nhl: "/stickers/disc-nhl.png",
+  nba: "/stickers/disc-nba.png",
+  cs2: "/stickers/disc-cs2.png",
+  rhythm: "/stickers/disc-rhythm.png",
 };
 
 export function DisciplineSticker({
   slug,
   className = "",
+  size = 56,
 }: {
   slug: string;
   className?: string;
+  size?: number;
 }) {
-  const conf = DISCIPLINE_STICKERS[slug] ?? {
-    kind: "diamond" as const,
-    color: "#7946E2",
-    rotate: 0,
-  };
+  const src = DISCIPLINE_STICKER_SRC[slug] ?? DISCIPLINE_STICKER_SRC.fifa;
   return (
-    <BrandSticker
-      kind={conf.kind}
-      color={conf.color}
-      rotate={conf.rotate}
-      size={56}
-      className={className}
+    <Image
+      src={src}
+      alt=""
+      width={size}
+      height={size}
+      className={`pointer-events-none select-none object-contain drop-shadow-[0_4px_12px_rgba(0,0,0,0.45)] ${className}`}
+      aria-hidden
     />
   );
 }
