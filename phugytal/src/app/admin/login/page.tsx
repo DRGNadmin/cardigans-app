@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 
 export default function AdminLoginPage() {
   const router = useRouter();
-  const [email, setEmail] = useState("");
+  const [email, setEmail] = useState("admin@phugytal.local");
   const [password, setPassword] = useState("");
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
@@ -18,10 +18,24 @@ export default function AdminLoginPage() {
       const res = await fetch("/api/auth/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email, password }),
+        body: JSON.stringify({
+          email: email.trim(),
+          password: password.trim(),
+        }),
       });
+      const body = (await res.json().catch(() => null)) as {
+        error?: string;
+      } | null;
       if (!res.ok) {
-        setError("Неверный логин или пароль");
+        if (res.status === 429) {
+          setError("Слишком много попыток — подождите 15 минут");
+        } else if (res.status === 403) {
+          setError("Запрос заблокирован (origin). Обновите страницу.");
+        } else {
+          setError(body?.error === "Invalid credentials"
+            ? "Неверный логин или пароль"
+            : body?.error ?? "Неверный логин или пароль");
+        }
         return;
       }
       router.replace("/admin");
@@ -47,7 +61,8 @@ export default function AdminLoginPage() {
           Email
           <input
             className="focus-ring mt-2 w-full border border-white/15 bg-black px-3 py-3 text-white"
-            type="email"
+            type="text"
+            inputMode="email"
             autoComplete="username"
             value={email}
             onChange={(e) => setEmail(e.target.value)}

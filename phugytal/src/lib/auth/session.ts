@@ -1,5 +1,6 @@
 import { cookies } from "next/headers";
 import { createHash, randomBytes } from "crypto";
+import type { NextResponse } from "next/server";
 import { prisma } from "@/lib/db";
 import type { Role } from "@prisma/client";
 
@@ -18,7 +19,21 @@ function hashToken(token: string): string {
   return createHash("sha256").update(token).digest("hex");
 }
 
-export async function createSession(userId: string): Promise<string> {
+function sessionCookieOptions(expiresAt: Date) {
+  return {
+    httpOnly: true,
+    secure: process.env.NODE_ENV === "production",
+    sameSite: "lax" as const,
+    path: "/",
+    expires: expiresAt,
+  };
+}
+
+/** Create DB session and return raw token + expiry (set cookie on the HTTP response). */
+export async function issueSession(userId: string): Promise<{
+  token: string;
+  expiresAt: Date;
+}> {
   const token = randomBytes(32).toString("hex");
   const tokenHash = hashToken(token);
   const expiresAt = new Date(Date.now() + SESSION_DAYS * 24 * 60 * 60 * 1000);
@@ -27,15 +42,21 @@ export async function createSession(userId: string): Promise<string> {
     data: { tokenHash, userId, expiresAt },
   });
 
-  const jar = await cookies();
-  jar.set(COOKIE, token, {
-    httpOnly: true,
-    secure: process.env.NODE_ENV === "production",
-    sameSite: "lax",
-    path: "/",
-    expires: expiresAt,
-  });
+  return { token, expiresAt };
+}
 
+export function attachSessionCookie(
+  res: NextResponse,
+  token: string,
+  expiresAt: Date,
+) {
+  res.cookies.set(COOKIE, token, sessionCookieOptions(expiresAt));
+}
+
+export async function createSession(userId: string): Promise<string> {
+  const { token, expiresAt } = await issueSession(userId);
+  const jar = await cookies();
+  jar.set(COOKIE, token, sessionCookieOptions(expiresAt));
   return token;
 }
 
