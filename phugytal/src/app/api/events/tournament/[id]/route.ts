@@ -1,4 +1,3 @@
-import { NextResponse } from "next/server";
 import { subscribeTournament } from "@/lib/realtime";
 
 export const dynamic = "force-dynamic";
