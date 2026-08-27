@@ -31,7 +31,7 @@ services:
       - key: CORS_ORIGIN
         value: https://drgnadmin.github.io
       - key: TELEGRAM_BOT_USERNAME
-        value: CardigansGamingBonuses_bot
+        value: MiniAppShowcaseCGbot
       - key: ADMIN_TELEGRAM_IDS
         sync: false
 
